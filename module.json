@@ -1,0 +1,34 @@
+{
+  "id": "fvtt-bcdice",
+  "title": "BCDice for Foundry VTT",
+  "description": "FVTT用BCDiceモジュール A FoundryVTT module to query BCDice servers for dice rolls",
+  "authors": [
+    {
+      "name": "Jean.N"
+    }
+  ],
+  "url": "https://github.com/jeannjeann/",
+  "version": "4.0.0",
+  "compatibility": {
+    "minimum": "11",
+    "verified": "11.315",
+    "maximum": "12"
+  },
+  "esmodules": ["/scripts/bcdice.js"],
+  "styles": ["/styles/bcdice.css"],
+  "languages": [
+    {
+      "lang": "en",
+      "name": "English",
+      "path": "languages/en.json"
+    },
+    {
+      "lang": "ja",
+      "name": "日本語",
+      "path": "languages/ja.json"
+    }
+  ],
+  "manifest": "https://github.com/jeannjeann/",
+  "download": "https://github.com/jeannjeann/",
+  "readme": "README.md"
+}

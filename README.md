@@ -14,7 +14,7 @@ https://foundryvtt.wiki/ja/BCDice
 プログラマの方はどうぞ気軽にIssueやPRをしてください。その他の方は以下のWikiにあるコミュニティDiscordに入り（事前確認不要）、BCDiceチャンネルで要望をご報告ください。
 https://foundryvtt.wiki/ja/home
 
-このモジュールは[jsin_me](https://github.com/jsinme/)さんが作製し、[こまる]()さんが改良したものをベースに作製されています。
+このモジュールは[jsin_me](https://github.com/jsinme/)さんが作製し、[こまる](https://x.com/komaru_5maru)さんが改良したものをベースに作製されています。
 
 ## ManifestURL
 https://github.com/jeannjeann/
@@ -23,10 +23,15 @@ https://github.com/jeannjeann/
 モッド・拡張機能、モジュールインストール、URLを指定に「ManifestURL」の文字を指定してインストールしてください。
 Please specify the letters "ManifestURL" in Mod Extensions, Module Installation, Specify URL and install.
 
+## 推奨モジュール
+- [Chat Commander](https://gitlab.com/woodentavern/foundryvtt-chat-command-lib) カスタムコマンドを使用する場合に必要
+
 ## Changelog
 
-### 4.0.0
+### 4.0.0 - v11 compatibility
 - Forked
+- Suppoerted v11
+- Added custom chat commands (require "Chat Commander" module)
 
 ### 3.2.0
 - Japanese translation updated.

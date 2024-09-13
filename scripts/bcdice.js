@@ -1,5 +1,6 @@
 import { showRoller, setupRoller } from "./bcroller.js";
 import { getSystems } from "./remote-api.js";
+import { customCommand } from "./customcommand.js";
 
 let roller;
 
@@ -9,21 +10,52 @@ Hooks.once("init", async () => {
   const select2Style = document.createElement("link");
   const select2Script = document.createElement("script");
 
-  select2Style.setAttribute("href", "https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css");
+  select2Style.setAttribute(
+    "href",
+    "https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css"
+  );
   select2Style.setAttribute("rel", "stylesheet");
 
-  select2Script.setAttribute("src", "https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js");
+  select2Script.setAttribute(
+    "src",
+    "https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"
+  );
 
   document.head.appendChild(select2Style);
   document.head.appendChild(select2Script);
 
   roller = await setupRoller();
   registerKeybinds();
+
+  // Custom chat command
+  let customCommandModule = "_chatcommands";
+  let chatcommands =
+    game.modules.has(customCommandModule) &&
+    game.modules.get(customCommandModule).active;
+  if (chatcommands) {
+    console.log("Enable BCDice commands");
+    game.chatCommands.register({
+      name: "/bcdice",
+      aliases: ["/bcd"],
+      module: "_chatcommands",
+      description: "BCDice command.",
+      iconClass: "fas fa-dice",
+      callback: async (chat, parameters, messageData) => {
+        let command = "/bcdice";
+        await customCommand(command, messageData, parameters);
+        return;
+      },
+    });
+  } else {
+    console.log("Disable BCDice commands");
+  }
 });
 
 Hooks.on("renderSceneControls", async function () {
   if (!$("#bc-dice-control").length) {
-    $("#controls > .main-controls").append('<li class="scene-control" id="bc-dice-control" title="BC Dice [Shift] + [Ctrl] + [B]"><i class="fas fa-dice"></i></li>');
+    $("#controls > .main-controls").append(
+      '<li class="scene-control" id="bc-dice-control" title="BC Dice [Shift] + [Ctrl] + [B]"><i class="fas fa-dice"></i></li>'
+    );
     $("#bc-dice-control").click(() => {
       showRoller(roller);
     });
@@ -31,31 +63,30 @@ Hooks.on("renderSceneControls", async function () {
 });
 
 async function registerKeybinds() {
-  game.keybindings.register("fvtt-bcdice", 'open', {
+  game.keybindings.register("fvtt-bcdice", "open", {
     name: game.i18n.localize("fvtt-bcdice.keybindName"),
     hint: game.i18n.localize("fvtt-bcdice.keybindHint"),
     editable: [
       {
-        key: 'KeyB',
+        key: "KeyB",
         modifiers: ["Control", "Shift"],
       },
     ],
     onDown: () => {
-      showRoller(roller)
+      showRoller(roller);
     },
     precedence: CONST.KEYBINDING_PRECEDENCE.NORMAL,
   });
 }
 
 async function registerSettings() {
-
   game.settings.register("fvtt-bcdice", "roller-persistance", {
     name: game.i18n.localize("fvtt-bcdice.persistanceSettingName"),
     hint: game.i18n.localize("fvtt-bcdice.persistanceSettingHint"),
     scope: "client",
     config: true,
     type: Boolean,
-    default: true
+    default: true,
   });
 
   game.settings.register("fvtt-bcdice", "formula-persistance", {
@@ -64,7 +95,7 @@ async function registerSettings() {
     scope: "client",
     config: true,
     type: Boolean,
-    default: false
+    default: false,
   });
 
   game.settings.register("fvtt-bcdice", "bc-server", {
@@ -73,7 +104,7 @@ async function registerSettings() {
     scope: "world",
     config: true,
     type: String,
-    default: "https://bcdice.trpg.net/v2"
+    default: "https://bcdice.trpg.net/v2",
   });
 
   game.settings.register("fvtt-bcdice", "success-color", {
@@ -82,7 +113,7 @@ async function registerSettings() {
     scope: "world",
     config: true,
     type: String,
-    default: "#2e6dff"
+    default: "#2e6dff",
   });
 
   game.settings.register("fvtt-bcdice", "failure-color", {
@@ -91,10 +122,10 @@ async function registerSettings() {
     scope: "world",
     config: true,
     type: String,
-    default: "#ff0077"
+    default: "#ff0077",
   });
 
-  const data = await getSystems()
+  const data = await getSystems();
 
   const systems = data.reduce((acc, el) => {
     acc[el.id] = el.name;
@@ -108,6 +139,6 @@ async function registerSettings() {
     config: true,
     type: String,
     choices: systems,
-    default: data[0].id
+    default: data[0].id,
   });
 }

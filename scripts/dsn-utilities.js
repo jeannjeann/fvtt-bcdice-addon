@@ -6,17 +6,11 @@ const toHalfWidth = (str) =>
   str.replace(/[！-～]/g, shiftCharCode(-0xfee0)).replace(/　/g, " ");
 
 function getSuccessColor() {
-  return (
-    game.settings.get("fvtt-bcdice", "success-color") ??
-    "#2e6dff"
-  );
+  return game.settings.get("fvtt-bcdice", "success-color") ?? "#2e6dff";
 }
 
 function getFailureColor() {
-  return (
-    game.settings.get("fvtt-bcdice", "failure-color") ??
-    "#ff0077"
-  );
+  return game.settings.get("fvtt-bcdice", "failure-color") ?? "#ff0077";
 }
 
 function isColor(color) {
@@ -92,16 +86,22 @@ async function roll(system, formula) {
     let results = undefined;
     if (data.success === true) {
       results = data.text
-      .split("\n")
-      .map((el) => `<p class="success-true" style="color: ${successColor}">${el}</p>`)
-      .join("")
-      .replace(/,/g, ",\u200B");
+        .split("\n")
+        .map(
+          (el) =>
+            `<p class="success-true" style="color: ${successColor}">${el}</p>`
+        )
+        .join("")
+        .replace(/,/g, ",\u200B");
     } else {
       results = data.text
-      .split("\n")
-      .map((el) => `<p class="success-false" style="color: ${failureColor}">${el}</p>`)
-      .join("")
-      .replace(/,/g, ",\u200B");
+        .split("\n")
+        .map(
+          (el) =>
+            `<p class="success-false" style="color: ${failureColor}">${el}</p>`
+        )
+        .join("")
+        .replace(/,/g, ",\u200B");
     }
 
     // const results = data.text
@@ -109,7 +109,6 @@ async function roll(system, formula) {
     //   .map((el) => `<p class="success-true">${el}</p>`)
     //   .join("")
     //   .replace(/,/g, ",\u200B");
-      
 
     const message = `<div><i class="fas fa-dice"></i> 
                         ${formula} ${results}
@@ -144,26 +143,28 @@ async function roll(system, formula) {
       const invalidFormulaText = game.i18n.localize(
         "fvtt-bcdice.invalidFormula"
       );
-    //  ChatMessage.create({
-    //    content: `<p>${invalidFormulaText}</p>
-    //              <p>${game.user.name}: ${formula}</p>`,
-    //    speaker: {
-    //      alias: aliasText,
-    //    },
-    //  });
+      //  ChatMessage.create({
+      //    content: `<p>${invalidFormulaText}</p>
+      //              <p>${game.user.name}: ${formula}</p>`,
+      //    speaker: {
+      //      alias: aliasText,
+      //    },
+      //  });
     }
     console.error(err);
   }
 }
 
 /**
- * 
+ *
  * @returns current entity document
  */
 function getCurrentDocument() {
   if (
     canvas?.tokens?.controlled.length === 1 &&
-    (game.user.isGM || canvas.tokens.controlled[0].actor.permission === CONST.DOCUMENT_OWNERSHIP_LEVELS.OWNER)
+    (game.user.isGM ||
+      canvas.tokens.controlled[0].actor.permission ===
+        CONST.DOCUMENT_OWNERSHIP_LEVELS.OWNER)
   ) {
     return canvas.tokens.controlled[0].document;
   }
@@ -180,4 +181,10 @@ function getDataForCurrentEntity() {
   );
 }
 
-export { parseBCtoDSN, appendDSNRoll, roll, getCurrentDocument, getDataForCurrentEntity };
+export {
+  parseBCtoDSN,
+  appendDSNRoll,
+  roll,
+  getCurrentDocument,
+  getDataForCurrentEntity,
+};

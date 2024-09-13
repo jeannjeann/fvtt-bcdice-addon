@@ -22,7 +22,7 @@ export async function getSystems() {
 }
 
 export async function getHelpText(system) {
-  return doRequest(`${getDiceServer()}/game_system/${system}`)
+  return doRequest(`${getDiceServer()}/game_system/${system}`);
 }
 
 export async function getRoll(system, command) {

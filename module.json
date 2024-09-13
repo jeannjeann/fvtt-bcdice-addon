@@ -7,7 +7,7 @@
       "name": "Jean.N"
     }
   ],
-  "url": "https://github.com/jeannjeann/",
+  "url": "https://github.com/jeannjeann/fvtt-bcdice",
   "version": "4.0.0",
   "compatibility": {
     "minimum": "11",
@@ -28,7 +28,7 @@
       "path": "languages/ja.json"
     }
   ],
-  "manifest": "https://github.com/jeannjeann/",
-  "download": "https://github.com/jeannjeann/",
+  "manifest": "https://github.com/jeannjeann/fvtt-bcdice",
+  "download": "https://github.com/jeannjeann/fvtt-bcdice",
   "readme": "README.md"
 }

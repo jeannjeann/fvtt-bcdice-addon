@@ -186,7 +186,7 @@ export default class BCDialog extends FormApplication {
     const [tabID, headerID] = target.split("-");
     tabs[+tabID].headers[+headerID].macros.push({
       display: game.i18n.localize("fvtt-bcdice.newMacro"),
-      macro: "1D20"
+      macro: "1D20",
     });
     this._updateObject(null, { tabs });
   }
@@ -206,12 +206,18 @@ export default class BCDialog extends FormApplication {
     if (rollFormula !== "") {
       this.roll(rollFormula);
     }
-    const shouldPersistInput = game.settings.get("fvtt-bcdice", "formula-persistance");
+    const shouldPersistInput = game.settings.get(
+      "fvtt-bcdice",
+      "formula-persistance"
+    );
     if (!shouldPersistInput) {
-      this.form.querySelector("#bc-formula").value = '';
+      this.form.querySelector("#bc-formula").value = "";
     }
 
-    const shouldPersistRoller = game.settings.get("fvtt-bcdice", "roller-persistance");
+    const shouldPersistRoller = game.settings.get(
+      "fvtt-bcdice",
+      "roller-persistance"
+    );
     if (ev.shiftKey || !shouldPersistRoller) {
       this.close();
     }
@@ -409,7 +415,7 @@ export default class BCDialog extends FormApplication {
           },
         },
       },
-      { width: 500, height:360 }
+      { width: 500, height: 360 }
     );
     this.dialog.render(true);
   }

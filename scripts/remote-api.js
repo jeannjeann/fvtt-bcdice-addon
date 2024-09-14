@@ -3,7 +3,7 @@ import { APIError } from "./errors.js";
 function getDiceServer() {
   return (
     game.settings.get("fvtt-bcdice", "bc-server") ??
-    "https://bcdice.trpg.net/v2"
+    "https://bcdice.onlinesession.app/v2"
   );
 }
 

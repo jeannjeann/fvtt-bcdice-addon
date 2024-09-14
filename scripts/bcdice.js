@@ -39,7 +39,7 @@ Hooks.once("init", async () => {
       aliases: ["/bcd"],
       module: "_chatcommands",
       description: "BCDice command.",
-      iconClass: "fas fa-dice",
+      icon: "fas fa-dice",
       callback: async (chat, parameters, messageData) => {
         let command = "/bcdice";
         await customCommand(command, messageData, parameters);
@@ -104,7 +104,7 @@ async function registerSettings() {
     scope: "world",
     config: true,
     type: String,
-    default: "https://bcdice.trpg.net/v2",
+    default: "https://bcdice.onlinesession.app/v2",
   });
 
   game.settings.register("fvtt-bcdice", "success-color", {

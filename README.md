@@ -27,8 +27,8 @@ Please specify the letters "ManifestURL" in Mod Extensions, Module Installation,
 ### 4.0.0 - v11 compatibility (developed by Jean.N)
 - Forked
 - Suppoerted v11 (also work on v12)
-- Added custom chat commands
-- Added inline roll function
+- Added custom chat commands ("/bcd" command)
+- Added inline roll function ("/bcd" command)
 - Added option to separate command and replacements when importing macros
 - Changed to output content to chat if formula is invalid
 

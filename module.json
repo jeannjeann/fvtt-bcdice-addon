@@ -28,7 +28,8 @@
       "path": "languages/ja.json"
     }
   ],
-  "manifest": "https://github.com/jeannjeann/fvtt-bcdice",
-  "download": "https://github.com/jeannjeann/fvtt-bcdice",
+  "manifest": "https://github.com/jeannjeann/fvtt-bcdice/releases/download/4.0.0/module.json",
+  "download": "https://github.com/jeannjeann/fvtt-bcdice/releases/download/4.0.0/module.zip",
+  "license": "LICENSE.txt",
   "readme": "README.md"
 }

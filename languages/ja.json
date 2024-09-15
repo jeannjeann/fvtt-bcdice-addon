@@ -46,5 +46,6 @@
   "fvtt-bcdice.SuccessColorSettingName": "'成功' の文字色",
   "fvtt-bcdice.SuccessColorSettingSettingHint": "ダイスロール結果が '成功' だった場合の文字色を指定します。初期値: #2667ff",
   "fvtt-bcdice.FailureColorSettingName": "'失敗' の文字色",
-  "fvtt-bcdice.FailureColorSettingHint": "ダイスロール結果が '失敗' だった場合の文字色を指定します。初期値: #ff0077"
+  "fvtt-bcdice.FailureColorSettingHint": "ダイスロール結果が '失敗' だった場合の文字色を指定します。初期値: #ff0077",
+  "fvtt-bcdice.importReplacements": "変数を分離して同時にインポートする"
 }

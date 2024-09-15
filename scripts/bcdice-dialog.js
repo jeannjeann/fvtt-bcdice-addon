@@ -349,7 +349,28 @@ export default class BCDialog extends FormApplication {
           label: game.i18n.localize("fvtt-bcdice.import"),
           callback: async (html) => {
             const tabName = html.find("input[name=tab-name]").val();
-            const importText = html.find("textarea").val();
+            const macroText = html.find("textarea").val();
+            const splitReplacements = html
+              .find("#splitReplacements")
+              .is(":checked");
+
+            // edit macro text
+            let importText, variables;
+            if (splitReplacements == true) {
+              const macroLines = macroText.split("\n");
+              importText = macroLines
+                .filter((line) => !line.trim().startsWith("//"))
+                .join("\n");
+              variables = macroLines
+                .filter((line) => line.trim().startsWith("//"))
+                .map((line) => line.replace(/^\/\/\s*/, ""))
+                .join("\n");
+              const replacements = variables;
+              await this._updateObject(null, { replacements });
+            } else {
+              importText = macroText;
+            }
+
             const settings = {
               headers: {
                 start: html.find("input[name=header-marker]").val(),

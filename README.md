@@ -33,7 +33,7 @@ Please specify the letters "ManifestURL" in Mod Extensions, Module Installation,
 - Suppoerted v11 (also work on v12)
 - Added custom chat commands
 - Added inline roll function
--- インポート時に変数とコマンド分離
+- Added option to separate command and replacements when importing macros
 - Changed to output content to chat if formula is invalid
 
 ### 3.2.0

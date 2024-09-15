@@ -46,5 +46,6 @@
   "fvtt-bcdice.SuccessColorSettingName": "'Success' font-color",
   "fvtt-bcdice.SuccessColorSettingSettingHint": "Specifies the text color when the die roll result is 'success'. default: #2667ff",
   "fvtt-bcdice.FailureColorSettingName": "'Failure' font-color",
-  "fvtt-bcdice.FailureColorSettingHint": "Specifies the text color when the die roll result is 'failure'. default: #ff0077"
+  "fvtt-bcdice.FailureColorSettingHint": "Specifies the text color when the die roll result is 'failure'. default: #ff0077",
+  "fvtt-bcdice.importReplacements": "Separate replacements and import them at the same time"
 }

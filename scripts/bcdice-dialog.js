@@ -346,7 +346,7 @@ export default class BCDialog extends FormApplication {
       buttons: {
         ok: {
           icon: '<i class="fas fa-file-import"></i>',
-          label: "Import",
+          label: game.i18n.localize("fvtt-bcdice.import"),
           callback: async (html) => {
             const tabName = html.find("input[name=tab-name]").val();
             const importText = html.find("textarea").val();
@@ -404,7 +404,7 @@ export default class BCDialog extends FormApplication {
         buttons: {
           ok: {
             icon: '<i class="fas fa-save"></i>',
-            label: "Save",
+            label: game.i18n.localize("fvtt-bcdice.save"),
             callback: async (html) => {
               const replacements = html
                 .find("textarea[name=replacements]")

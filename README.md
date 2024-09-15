@@ -32,7 +32,9 @@ Please specify the letters "ManifestURL" in Mod Extensions, Module Installation,
 - Forked
 - Suppoerted v11 (also work on v12)
 - Added custom chat commands (require "Chat Commander" module)
-- Added inline roll function
+-- インラインロール　Added inline roll function
+-- インポート時に変数とコマンド分離
+-- 平文はエラーではなくそのままチャットに転載
 
 ### 3.2.0
 - Japanese translation updated.

@@ -49,6 +49,14 @@ Hooks.once("init", async () => {
   } else {
     console.log("Disable BCDice commands");
   }
+
+  // Inline roll parse
+  CONFIG.TextEditor.enrichers.push({
+    pattern: /\[\[\/bcd .*?]]/gi,
+    enricher: inlineRollButton,
+  });
+  // activate listeners
+  $("body").on("click", "a.bcd-inline-roll", onClickInlineRollButton);
 });
 
 Hooks.on("renderSceneControls", async function () {
@@ -78,6 +86,36 @@ async function registerKeybinds() {
     precedence: CONST.KEYBINDING_PRECEDENCE.NORMAL,
   });
 }
+
+/**
+ * Text enricher that creates a deferred inline roll button.
+ * @param {RegExpMatchArray} match the pattern match for this enricher
+ * @param {EnrichmentOptions} _options the options passed to the enrich function
+ * @returns {HTMLAnchorElement} the deferred inline roll button
+ */
+const inlineRollButton = (match, _options) => {
+  const literal = match[0].slice(7, -2);
+  const a = document.createElement("a");
+  a.classList.add("bcd-inline-roll");
+  a.dataset.messageData = literal;
+  a.dataset.parameters = literal.replace("/bcd", "");
+  a.innerHTML = `<i class="fas fa-dice"></i>${literal}`;
+  return a;
+};
+
+/**
+ * @param {Event} event the browser event that triggered this listener
+ */
+const onClickInlineRollButton = (event) => {
+  event.preventDefault();
+  const a = event.currentTarget;
+  const command = "/bcd";
+  const messageId = a.closest(".message")?.dataset.messageId;
+  const messageData = game.messages.get(messageId);
+  const parameters = a.dataset.parameters;
+
+  return customCommand(command, messageData, parameters);
+};
 
 async function registerSettings() {
   game.settings.register("fvtt-bcdice", "roller-persistance", {

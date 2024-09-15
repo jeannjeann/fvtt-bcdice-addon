@@ -159,15 +159,14 @@ async function roll(system, formula) {
       const invalidFormulaText = game.i18n.localize(
         "fvtt-bcdice.invalidFormula"
       );
-      //  ChatMessage.create({
-      //    content: `<p>${invalidFormulaText}</p>
-      //              <p>${game.user.name}: ${formula}</p>`,
-      //    speaker: {
-      //      alias: aliasText,
-      //    },
-      //  });
+      ChatMessage.create({
+        content: `${formula}`,
+        speaker: {
+          alias: `${entity.name}`,
+        },
+      });
     }
-    console.error(err);
+    //console.error(err);
   }
 }
 

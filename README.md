@@ -34,7 +34,7 @@ Please specify the letters "ManifestURL" in Mod Extensions, Module Installation,
 - Added custom chat commands
 - Added inline roll function
 -- インポート時に変数とコマンド分離
--- 平文はエラーではなくそのままチャットに転載
+- Changed to output content to chat if formula is invalid
 
 ### 3.2.0
 - Japanese translation updated.

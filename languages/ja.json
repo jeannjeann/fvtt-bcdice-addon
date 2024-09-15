@@ -39,6 +39,8 @@
   "fvtt-bcdice.keybindHint": "BCダイスを使うためのメニューとチャットパレットを登録するための画面を開きます。",
   "fvtt-bcdice.formulaPersistanceSettingName": "ロール式を維持する",
   "fvtt-bcdice.formulaPersistanceSettingHint": "［ダイスロール］ボタンでロール後、［ロール式］の文字列を消去しない。",
+  "fvtt-bcdice.NormalColorSettingName": "通常時の文字色",
+  "fvtt-bcdice.NormalColorSettingSettingHint": "ダイスロール結果の文字色を指定します。初期値: #000000",
   "fvtt-bcdice.SuccessColorSettingName": "'成功' の文字色",
   "fvtt-bcdice.SuccessColorSettingSettingHint": "ダイスロール結果が '成功' だった場合の文字色を指定します。初期値: #2667ff",
   "fvtt-bcdice.FailureColorSettingName": "'失敗' の文字色",

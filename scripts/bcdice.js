@@ -151,6 +151,15 @@ async function registerSettings() {
     default: "https://bcdice.onlinesession.app/v2",
   });
 
+  game.settings.register("fvtt-bcdice", "normal-color", {
+    name: game.i18n.localize("fvtt-bcdice.NormalColorSettingName"),
+    hint: game.i18n.localize("fvtt-bcdice.NormalColorSettingSettingHint"),
+    scope: "world",
+    config: true,
+    type: String,
+    default: "#000000",
+  });
+
   game.settings.register("fvtt-bcdice", "success-color", {
     name: game.i18n.localize("fvtt-bcdice.SuccessColorSettingName"),
     hint: game.i18n.localize("fvtt-bcdice.SuccessColorSettingSettingHint"),

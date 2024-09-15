@@ -12,6 +12,9 @@ function getSuccessColor() {
 function getFailureColor() {
   return game.settings.get("fvtt-bcdice", "failure-color") ?? "#ff0077";
 }
+function getNormalColor() {
+  return game.settings.get("fvtt-bcdice", "normal-color") ?? "#000000";
+}
 
 function isColor(color) {
   return color.match(/^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/) !== null;
@@ -76,11 +79,15 @@ async function roll(system, formula) {
 
     let successColor = getSuccessColor();
     let failureColor = getFailureColor();
+    let normalColor = getNormalColor();
     if (isColor(successColor) === false) {
       successColor = "#2667ff";
     }
     if (isColor(failureColor) === false) {
       failureColor = "#ff0077";
+    }
+    if (isColor(normalColor) === false) {
+      normalColor = "#000000";
     }
 
     let results = undefined;
@@ -93,12 +100,21 @@ async function roll(system, formula) {
         )
         .join("")
         .replace(/,/g, ",\u200B");
-    } else {
+    } else if (data.failure === true) {
       results = data.text
         .split("\n")
         .map(
           (el) =>
             `<p class="success-false" style="color: ${failureColor}">${el}</p>`
+        )
+        .join("")
+        .replace(/,/g, ",\u200B");
+    } else {
+      results = data.text
+        .split("\n")
+        .map(
+          (el) =>
+            `<p class="success-normal" style="color: ${normalColor}">${el}</p>`
         )
         .join("")
         .replace(/,/g, ",\u200B");

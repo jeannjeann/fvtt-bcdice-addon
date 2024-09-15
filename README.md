@@ -7,28 +7,24 @@ Alternatively, if you have a system which foundry does not support, you can subm
 
 ## BCDice
 日本でもっとも使われている、TRPG用ダイスロール処理システムです。どどんとふ、ココフォリア、ユドナリウム、TRPGスタジオなどさまざまなオンセツールで使われています。（https://bcdice.org/ より引用）
-Modの使い方はWikiよりご確認ください。
+Modの使い方はWikiよりご確認ください（jsin_me版の情報）。
 https://foundryvtt.wiki/ja/BCDice
 
-また、このModは日本コミュニティの支援により開発されました。
-プログラマの方はどうぞ気軽にIssueやPRをしてください。その他の方は以下のWikiにあるコミュニティDiscordに入り（事前確認不要）、BCDiceチャンネルで要望をご報告ください。
+サポートは以下のWikiにあるコミュニティDiscordに入り（事前確認不要）、BCDiceチャンネルで要望をご報告ください。
 https://foundryvtt.wiki/ja/home
 
 このモジュールは[jsin_me](https://github.com/jsinme/)さんが作製し、[こまる](https://x.com/komaru_5maru)さんが改良したものをベースに作製されています。
 
 ## ManifestURL
-https://github.com/jeannjeann/
+https://github.com/jeannjeann/fvtt-bcdice/releases/latest/download/module.json
 
 ◆モジュールのインストール方法
 モッド・拡張機能、モジュールインストール、URLを指定に「ManifestURL」の文字を指定してインストールしてください。
 Please specify the letters "ManifestURL" in Mod Extensions, Module Installation, Specify URL and install.
 
-## 推奨モジュール
-- [Chat Commander](https://gitlab.com/woodentavern/foundryvtt-chat-command-lib) カスタムコマンドを使用する場合に必要
-
 ## Changelog
 
-### 4.0.0 - v11 compatibility
+### 4.0.0 - v11 compatibility (developed by Jean.N)
 - Forked
 - Suppoerted v11 (also work on v12)
 - Added custom chat commands
@@ -55,7 +51,7 @@ Please specify the letters "ManifestURL" in Mod Extensions, Module Installation,
 ### 3.1.3
 - Bugfix a problem in which the "BCDice Dialog" could not be opened unless the user had the "Assistant GM" privilege or higher.
 
-### 3.1.2
+### 3.1.2 (developed by こまる)
 - Bugfix Foundry VTT Ver. 10 is now supported.
 - removed "/scripts/persistent-dialog.js" from "esmodules".
 - Bugfix an issue with the height of the variable conversion dialog at bcdice-dialog.js.
@@ -118,7 +114,7 @@ As requested by the Japanese community
 - Roller will now remember the last selected game system when reopened
 - Result chat message will now also contain the original command below the result
 
-### 0.1
+### 0.1 (developed by jsin_me)
 - BCDice Control in left controls bar
 - Roller Application that allows a user to select from a list of available systems, input a command, and submit that command to the api
 - Chat Message containing result fo the roll

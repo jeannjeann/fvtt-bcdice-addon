@@ -3,6 +3,7 @@ import { getSystems } from "./remote-api.js";
 import { customCommand } from "./customcommand.js";
 
 let roller;
+const command = "/bcd";
 
 Hooks.once("init", async () => {
   registerSettings();
@@ -27,27 +28,23 @@ Hooks.once("init", async () => {
   roller = await setupRoller();
   registerKeybinds();
 
-  // Custom chat command
+  // Custom chat command for Chat Commander
   let customCommandModule = "_chatcommands";
   let chatcommands =
     game.modules.has(customCommandModule) &&
     game.modules.get(customCommandModule).active;
   if (chatcommands) {
-    console.log("Enable BCDice commands");
     game.chatCommands.register({
-      name: "/bcdice",
-      aliases: ["/bcd"],
+      name: "/bcd",
+      aliases: ["/bcdice"],
       module: "_chatcommands",
       description: "BCDice command.",
       icon: "fas fa-dice",
       callback: async (chat, parameters, messageData) => {
-        let command = "/bcdice";
         await customCommand(command, messageData, parameters);
         return;
       },
     });
-  } else {
-    console.log("Disable BCDice commands");
   }
 
   // Inline roll parse
@@ -57,6 +54,16 @@ Hooks.once("init", async () => {
   });
   // activate listeners
   $("body").on("click", "a.bcd-inline-roll", onClickInlineRollButton);
+});
+
+// Custom chat command
+Hooks.on("chatMessage", (chat, parameters, messageData) => {
+  if (parameters !== undefined && parameters.startsWith(command)) {
+    customCommand(command, messageData, parameters.slice(5));
+    return false;
+  } else {
+    return true;
+  }
 });
 
 Hooks.on("renderSceneControls", async function () {
@@ -98,7 +105,7 @@ const inlineRollButton = (match, _options) => {
   const a = document.createElement("a");
   a.classList.add("bcd-inline-roll");
   a.dataset.messageData = literal;
-  a.dataset.parameters = literal.replace("/bcd", "");
+  a.dataset.parameters = literal.replace(command, "");
   a.innerHTML = `<i class="fas fa-dice"></i>${literal}`;
   return a;
 };
@@ -109,7 +116,6 @@ const inlineRollButton = (match, _options) => {
 const onClickInlineRollButton = (event) => {
   event.preventDefault();
   const a = event.currentTarget;
-  const command = "/bcd";
   const messageId = a.closest(".message")?.dataset.messageId;
   const messageData = game.messages.get(messageId);
   const parameters = a.dataset.parameters;

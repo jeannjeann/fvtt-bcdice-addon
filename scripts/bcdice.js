@@ -28,6 +28,10 @@ Hooks.once("init", async () => {
   roller = await setupRoller();
   registerKeybinds();
 
+  game.modules.get("fvtt-bcdice").api = {
+    customCommand,
+  };
+
   // Custom chat command for Chat Commander
   let customCommandModule = "_chatcommands";
   let chatcommands =

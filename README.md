@@ -23,11 +23,24 @@ https://github.com/jeannjeann/fvtt-bcdice/releases/latest/download/module.json
 モッド・拡張機能、モジュールインストール、URLを指定に「ManifestURL」の文字を指定してインストールしてください。
 Please specify the letters "ManifestURL" in Mod Extensions, Module Installation, Specify URL and install.
 
+## Custom System Builderで使用する方法
+「Label roll message」に以下のコードを入力することでBCDiceを経由するロールが可能になります。
+```
+%{localVars.bcdformula=`ロール式`}%
+%{game.modules.get("fvtt-bcdice").api.customCommand("/bcd","",`${bcdformula}$`)}%
+```
+- <ロール式>を任意に置き換えてください。
+- ロール式には「\$\{\}\$」で括ったCustom System Builderの変数を使用できます。
+- 「Send roll message to chat」オプションをオフにしておけばチャットに余分なメッセージが出力されません。
+- キャラクターシートのアクターではなく、現在選択しているトークンがチャットの発言者になります。
+- 結果を分離して取得できないのでBCDice外での自動化は現状難しいかもしれません。
+
+
 ## Changelog
 
 ### 4.0.0 - v11 compatibility (developed by Jean.N)
 - Forked
-- Suppoerted v11 (also work on v12)
+- Suppoerted v11 (also works on v12, but with alerts)
 - Added custom chat commands ("/bcd" command)
 - Added inline roll function ("/bcd" command)
 - Added option to separate command and replacements when importing macros

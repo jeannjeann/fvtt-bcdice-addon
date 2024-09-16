@@ -33,7 +33,7 @@ async function getSysHelp(system) {
 async function setupRoller() {
   await loadTemplates(
     ["dialog", "import", "macro", "replacements"].map(
-      (s) => `modules/fvtt-bcdice/templates/${s}.html`
+      (s) => `modules/fvtt-bcdice-addon/templates/${s}.html`
     )
   );
 

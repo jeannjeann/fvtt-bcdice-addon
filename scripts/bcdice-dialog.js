@@ -24,7 +24,7 @@ export default class BCDialog extends FormApplication {
       submitOnChange: true,
       scrollY: ["div.bcdice-macro-page"],
       title: "BCDice Roller",
-      template: "modules/fvtt-bcdice/templates/dialog.html",
+      template: "modules/fvtt-bcdice-addon/templates/dialog.html",
       tabs: [
         {
           navSelector: ".bcdice-tabs",
@@ -77,8 +77,8 @@ export default class BCDialog extends FormApplication {
   activateListeners(html) {
     super.activateListeners(html);
     const system =
-      game.users.get(game.userId).getFlag("fvtt-bcdice", "sys-id") ??
-      game.settings.get("fvtt-bcdice", "game-system");
+      game.users.get(game.userId).getFlag("fvtt-bcdice-addon", "sys-id") ??
+      game.settings.get("fvtt-bcdice-addon", "game-system");
     html.find("#bc-system-help").click(this.getSysHelp.bind(this));
     html.find("#bc-systems").val(system);
     html.find("#bc-formula").focus();
@@ -86,7 +86,7 @@ export default class BCDialog extends FormApplication {
     html.find(".s2").on("select2:select", (e) => {
       game.users
         .get(game.userId)
-        .setFlag("fvtt-bcdice", "sys-id", `${e.params.data.id}`);
+        .setFlag("fvtt-bcdice-addon", "sys-id", `${e.params.data.id}`);
     });
     html.find("#bc-formula").on("keydown", this._onKeyDown.bind(this));
     // html
@@ -207,7 +207,7 @@ export default class BCDialog extends FormApplication {
       this.roll(rollFormula);
     }
     const shouldPersistInput = game.settings.get(
-      "fvtt-bcdice",
+      "fvtt-bcdice-addon",
       "formula-persistance"
     );
     if (!shouldPersistInput) {
@@ -215,7 +215,7 @@ export default class BCDialog extends FormApplication {
     }
 
     const shouldPersistRoller = game.settings.get(
-      "fvtt-bcdice",
+      "fvtt-bcdice-addon",
       "roller-persistance"
     );
     if (ev.shiftKey || !shouldPersistRoller) {
@@ -273,8 +273,8 @@ export default class BCDialog extends FormApplication {
 
   getSystem() {
     return (
-      game.user.getFlag("fvtt-bcdice", "sys-id") ??
-      game.settings.get("fvtt-bcdice", "game-system")
+      game.user.getFlag("fvtt-bcdice-addon", "sys-id") ??
+      game.settings.get("fvtt-bcdice-addon", "game-system")
     );
   }
 
@@ -331,7 +331,7 @@ export default class BCDialog extends FormApplication {
     this.dialog?.close();
 
     const dialogContent = await renderTemplate(
-      "modules/fvtt-bcdice/templates/import.html",
+      "modules/fvtt-bcdice-addon/templates/import.html",
       {
         settings: mergeObject(
           defaultImportSettings,
@@ -413,7 +413,7 @@ export default class BCDialog extends FormApplication {
     this.dialog?.close();
 
     const dialogContent = await renderTemplate(
-      "modules/fvtt-bcdice/templates/replacements.html",
+      "modules/fvtt-bcdice-addon/templates/replacements.html",
       { replacements: getDataForCurrentEntity().replacements }
     );
 
@@ -460,7 +460,7 @@ export default class BCDialog extends FormApplication {
     const tabs = formData.tabs || getDataForCurrentEntity().tabs;
     const data = mergeObject(getDataForCurrentEntity(), expandObject(formData));
     data.tabs = tabs;
-    await getCurrentDocument().setFlag("fvtt-bcdice", "macro-data", data);
+    await getCurrentDocument().setFlag("fvtt-bcdice-addon", "macro-data", data);
     this._render();
   }
 

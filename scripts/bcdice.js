@@ -28,7 +28,7 @@ Hooks.once("init", async () => {
   roller = await setupRoller();
   registerKeybinds();
 
-  game.modules.get("fvtt-bcdice").api = {
+  game.modules.get("fvtt-bcdice-addon").api = {
     customCommand,
   };
 
@@ -82,7 +82,7 @@ Hooks.on("renderSceneControls", async function () {
 });
 
 async function registerKeybinds() {
-  game.keybindings.register("fvtt-bcdice", "open", {
+  game.keybindings.register("fvtt-bcdice-addon", "open", {
     name: game.i18n.localize("fvtt-bcdice.keybindName"),
     hint: game.i18n.localize("fvtt-bcdice.keybindHint"),
     editable: [
@@ -128,7 +128,7 @@ const onClickInlineRollButton = (event) => {
 };
 
 async function registerSettings() {
-  game.settings.register("fvtt-bcdice", "roller-persistance", {
+  game.settings.register("fvtt-bcdice-addon", "roller-persistance", {
     name: game.i18n.localize("fvtt-bcdice.persistanceSettingName"),
     hint: game.i18n.localize("fvtt-bcdice.persistanceSettingHint"),
     scope: "client",
@@ -137,7 +137,7 @@ async function registerSettings() {
     default: true,
   });
 
-  game.settings.register("fvtt-bcdice", "formula-persistance", {
+  game.settings.register("fvtt-bcdice-addon", "formula-persistance", {
     name: game.i18n.localize("fvtt-bcdice.formulaPersistanceSettingName"),
     hint: game.i18n.localize("fvtt-bcdice.formulaPersistanceSettingHint"),
     scope: "client",
@@ -146,7 +146,7 @@ async function registerSettings() {
     default: false,
   });
 
-  game.settings.register("fvtt-bcdice", "bc-server", {
+  game.settings.register("fvtt-bcdice-addon", "bc-server", {
     name: game.i18n.localize("fvtt-bcdice.serverSettingName"),
     hint: game.i18n.localize("fvtt-bcdice.serverSettingHint"),
     scope: "world",
@@ -155,7 +155,7 @@ async function registerSettings() {
     default: "https://bcdice.onlinesession.app/v2",
   });
 
-  game.settings.register("fvtt-bcdice", "normal-color", {
+  game.settings.register("fvtt-bcdice-addon", "normal-color", {
     name: game.i18n.localize("fvtt-bcdice.NormalColorSettingName"),
     hint: game.i18n.localize("fvtt-bcdice.NormalColorSettingSettingHint"),
     scope: "world",
@@ -164,7 +164,7 @@ async function registerSettings() {
     default: "#000000",
   });
 
-  game.settings.register("fvtt-bcdice", "success-color", {
+  game.settings.register("fvtt-bcdice-addon", "success-color", {
     name: game.i18n.localize("fvtt-bcdice.SuccessColorSettingName"),
     hint: game.i18n.localize("fvtt-bcdice.SuccessColorSettingSettingHint"),
     scope: "world",
@@ -173,7 +173,7 @@ async function registerSettings() {
     default: "#2e6dff",
   });
 
-  game.settings.register("fvtt-bcdice", "failure-color", {
+  game.settings.register("fvtt-bcdice-addon", "failure-color", {
     name: game.i18n.localize("fvtt-bcdice.FailureColorSettingName"),
     hint: game.i18n.localize("fvtt-bcdice.FailureColorSettingHint"),
     scope: "world",
@@ -189,7 +189,7 @@ async function registerSettings() {
     return acc;
   }, {});
 
-  game.settings.register("fvtt-bcdice", "game-system", {
+  game.settings.register("fvtt-bcdice-addon", "game-system", {
     name: game.i18n.localize("fvtt-bcdice.systemSettingName"),
     hint: game.i18n.localize("fvtt-bcdice.systemSettingHint"),
     scope: "world",

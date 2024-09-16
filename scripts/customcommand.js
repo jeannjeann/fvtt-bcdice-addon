@@ -10,8 +10,8 @@ export async function customCommand(command, messageData, parameters) {
 
   if (rollFormula !== "") {
     const system =
-      game.user.getFlag("fvtt-bcdice", "sys-id") ??
-      game.settings.get("fvtt-bcdice", "game-system");
+      game.user.getFlag("fvtt-bcdice-addon", "sys-id") ??
+      game.settings.get("fvtt-bcdice-addon", "game-system");
     const replacements = getReplacements();
     const set = new Set();
     while (rollFormula.match(replacementRegex)) {

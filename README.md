@@ -17,7 +17,7 @@ https://foundryvtt.wiki/ja/home
 このモジュールは[jsin_me](https://github.com/jsinme/)さんが作製し、[こまる](https://x.com/komaru_5maru)さんが改良したものをベースに作製されています。
 
 ## ManifestURL
-https://github.com/jeannjeann/fvtt-bcdice/releases/latest/download/module.json
+https://github.com/jeannjeann/fvtt-bcdice-addon/releases/latest/download/module.json
 
 ◆モジュールのインストール方法
 モッド・拡張機能、モジュールインストール、URLを指定に「ManifestURL」の文字を指定してインストールしてください。
@@ -27,7 +27,7 @@ Please specify the letters "ManifestURL" in Mod Extensions, Module Installation,
 「Label roll message」に以下のコードを入力することでBCDiceを経由するロールが可能になります。
 ```
 %{localVars.bcdformula=`ロール式`}%
-%{game.modules.get("fvtt-bcdice").api.customCommand("/bcd","",`${bcdformula}$`)}%
+%{game.modules.get("fvtt-bcdice-addon").api.customCommand("/bcd","",`${bcdformula}$`)}%
 ```
 - <ロール式>を任意に置き換えてください。
 - ロール式には「\$\{\}\$」で括ったCustom System Builderの変数を使用できます。

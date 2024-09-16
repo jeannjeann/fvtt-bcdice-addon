@@ -6,14 +6,14 @@ const toHalfWidth = (str) =>
   str.replace(/[！-～]/g, shiftCharCode(-0xfee0)).replace(/　/g, " ");
 
 function getSuccessColor() {
-  return game.settings.get("fvtt-bcdice", "success-color") ?? "#2e6dff";
+  return game.settings.get("fvtt-bcdice-addon", "success-color") ?? "#2e6dff";
 }
 
 function getFailureColor() {
-  return game.settings.get("fvtt-bcdice", "failure-color") ?? "#ff0077";
+  return game.settings.get("fvtt-bcdice-addon", "failure-color") ?? "#ff0077";
 }
 function getNormalColor() {
-  return game.settings.get("fvtt-bcdice", "normal-color") ?? "#000000";
+  return game.settings.get("fvtt-bcdice-addon", "normal-color") ?? "#000000";
 }
 
 function isColor(color) {
@@ -188,7 +188,7 @@ function getCurrentDocument() {
 
 function getDataForCurrentEntity() {
   return duplicate(
-    getCurrentDocument().getFlag("fvtt-bcdice", "macro-data") ?? {
+    getCurrentDocument().getFlag("fvtt-bcdice-addon", "macro-data") ?? {
       tabs: [],
       importSettings: {},
       replacements: "",

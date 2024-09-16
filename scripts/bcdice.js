@@ -39,7 +39,7 @@ Hooks.once("init", async () => {
       aliases: ["/bcdice"],
       module: "_chatcommands",
       description: "BCDice command.",
-      icon: "fas fa-dice",
+      icon: "<i class='fas fa-dice'></i>",
       callback: async (chat, parameters, messageData) => {
         await customCommand(command, messageData, parameters);
         return;

@@ -42,7 +42,7 @@
   "fvtt-bcdice.formulaPersistanceSettingName": "Formula Persistance",
   "fvtt-bcdice.formulaPersistanceSettingHint": "Should the formula in the text input stay after pressing Enter / Roll?",
   "fvtt-bcdice.NormalColorSettingName": "Font color",
-  "fvtt-bcdice.NormalColorSettingSettingHint": "Text color of the die roll result . default: #000000",
+  "fvtt-bcdice.NormalColorSettingSettingHint": "Text color of the die roll result . default: #555555",
   "fvtt-bcdice.SuccessColorSettingName": "'Success' font-color",
   "fvtt-bcdice.SuccessColorSettingSettingHint": "Specifies the text color when the die roll result is 'success'. default: #2667ff",
   "fvtt-bcdice.FailureColorSettingName": "'Failure' font-color",

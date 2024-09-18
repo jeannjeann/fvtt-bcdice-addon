@@ -161,7 +161,7 @@ async function registerSettings() {
     scope: "world",
     config: true,
     type: String,
-    default: "#000000",
+    default: "#555555",
   });
 
   game.settings.register("fvtt-bcdice-addon", "success-color", {

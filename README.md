@@ -7,12 +7,12 @@ A module to query the BCDice API for dice rolls. BCDice is the largest dice roll
 Alternatively, if you have a system which foundry does not support, you can submit how that system does dice rolls and it can be implemented in BCDice (thus allowing you to use that system in foundry). Currently, the majority of users are from Japan and Korea. Looking forward to seeing others joing the team!
 
 ## BCDice
-日本でもっとも使われている、TRPG用ダイスロール処理システムです。どどんとふ、ココフォリア、ユドナリウム、TRPGスタジオなどさまざまなオンセツールで使われています。（https://bcdice.org/ より引用）
-Modの使い方はWikiよりご確認ください（jsin_me版の情報）。
-https://foundryvtt.wiki/ja/BCDice
+日本でもっとも使われている、TRPG用ダイスロール処理システムです。どどんとふ、ココフォリア、ユドナリウム、TRPGスタジオなどさまざまなオンセツールで使われています。
+（https://bcdice.org/ より引用）
 
-サポートは以下のWikiにあるコミュニティDiscordに入り（事前確認不要）、BCDiceチャンネルで要望をご報告ください。
-https://foundryvtt.wiki/ja/home
+Modの使い方は[Wiki](https://foundryvtt.wiki/ja/BCDice)よりご確認ください（jsin_me版の情報）。
+
+サポートは[Wiki](https://foundryvtt.wiki/ja/home)にあるコミュニティDiscordに入り（事前確認不要）、BCDiceチャンネルで要望をご報告ください。
 
 このモジュールは[jsin_me](https://github.com/jsinme/)さんが作製し、[こまる](https://x.com/komaru_5maru)さんが改良したものをベースに作製されています。
 
@@ -21,22 +21,30 @@ https://github.com/jeannjeann/fvtt-bcdice-addon/releases/latest/download/module.
 
 ◆モジュールのインストール方法
 モッド・拡張機能、モジュールインストール、URLを指定に「ManifestURL」の文字を指定してインストールしてください。
+
 Please specify the letters "ManifestURL" in Mod Extensions, Module Installation, Specify URL and install.
 
 ## Custom System Builderで使用する方法
 「Label roll message」に以下のコードを入力することでBCDiceを経由するロールが可能になります。
 ```
-%{localVars.bcdformula=`ロール式`}%
-%{game.modules.get("fvtt-bcdice-addon").api.customCommand("/bcd","",`${bcdformula}$`)}%
+${#%{localVars.bcdformula=`ロール式`}%}$
+${#%{localVars.text=await game.modules.get("fvtt-bcdice-addon").api.customCommand("/bcd","",`${bcdformula}$`)}%}$
+${#%{localVars.result=`${text}$`.substring(`${text}$`.lastIndexOf("＞ ") + 2)}%}$
 ```
-- <ロール式>を任意に置き換えてください。
-- ロール式には「\$\{\}\$」で括ったCustom System Builderの変数を使用できます。
-- 「Send roll message to chat」オプションをオフにしておけばチャットに余分なメッセージが出力されません。
-- キャラクターシートのアクターではなく、現在選択しているトークンがチャットの発言者になります。
-- 結果を分離して取得できないのでBCDice外での自動化は現状難しいかもしれません。
+- ロール式の部分を任意の式に置き換えてください。
+- ロール式には`{}`で括ったチャットパレットの変数に加えて、`${}$`で括ったCustom System Builderの変数も使用できます。
+- 出力結果の全文が`${text}$`に、最後の項目が`${result}$`に代入されます。
+  - 自動化は`${result}$`を使用したコードを追加してください。。
+  - 選択したダイスボットや、ロール式によって`${result}$`が特殊な結果になる場合は、スクリプトやマクロで`${text}$`を整形して利用してください。
+- BCDiceの出力結果のみを表示したい場合は「Send roll message to chat」オプションをオフにしてください。
+- ロール結果の発言者は現在選択しているトークンになります。キャラクターシートのアクターではないので注意してください。
 
 
 ## Changelog
+
+### 4.0.1
+- Fixed to output return value of roll result
+- bug fix
 
 ### 4.0.0 - v11 compatibility (developed by Jean.N)
 - Forked

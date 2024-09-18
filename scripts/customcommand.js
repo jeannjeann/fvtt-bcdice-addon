@@ -21,7 +21,9 @@ export async function customCommand(command, messageData, parameters) {
       });
     }
 
-    roll(system, rollFormula);
+    const results = await roll(system, rollFormula);
+    const result = await getResult(system, results);
+    return result;
   }
 }
 
@@ -50,4 +52,18 @@ function getReplacements() {
       out[key] = val;
     });
   return out;
+}
+
+// modify result
+function getResult(system, results) {
+  let result;
+  switch (system) {
+    case "Custom System Name":
+      result = results.result;
+      break;
+    default:
+      result = results.text;
+      break;
+  }
+  return result;
 }

@@ -13,7 +13,7 @@ function getFailureColor() {
   return game.settings.get("fvtt-bcdice-addon", "failure-color") ?? "#ff0077";
 }
 function getNormalColor() {
-  return game.settings.get("fvtt-bcdice-addon", "normal-color") ?? "#000000";
+  return game.settings.get("fvtt-bcdice-addon", "normal-color") ?? "#555555";
 }
 
 function isColor(color) {
@@ -87,7 +87,7 @@ async function roll(system, formula) {
       failureColor = "#ff0077";
     }
     if (isColor(normalColor) === false) {
-      normalColor = "#000000";
+      normalColor = "#555555";
     }
 
     let results = undefined;
@@ -154,6 +154,12 @@ async function roll(system, formula) {
     }
 
     ChatMessage.create(messageOptions);
+
+    const text = data.text;
+    const index = text.lastIndexOf("＞ ");
+    const result = text.substring(index + 2);
+
+    return { text, result };
   } catch (err) {
     if (err instanceof APIError) {
       const invalidFormulaText = game.i18n.localize(
@@ -167,6 +173,7 @@ async function roll(system, formula) {
       });
     }
     //console.error(err);
+    return { text: `${formula}`, result: null };
   }
 }
 

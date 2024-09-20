@@ -83,10 +83,11 @@ export default class BCDialog extends FormApplication {
     html.find("#bc-systems").val(system);
     html.find("#bc-formula").focus();
     html.find(".s2").select2();
-    html.find(".s2").on("select2:select", (e) => {
-      game.users
+    html.find(".s2").on("select2:select", async (e) => {
+      await game.users
         .get(game.userId)
         .setFlag("fvtt-bcdice-addon", "sys-id", `${e.params.data.id}`);
+      this.render(false);
     });
     html.find("#bc-formula").on("keydown", this._onKeyDown.bind(this));
     // html

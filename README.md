@@ -35,12 +35,17 @@ ${#%{localVars.result=`${text}$`.substring(`${text}$`.lastIndexOf("＞ ") + 2)}%
 - ロール式には`{}`で括ったチャットパレットの変数に加えて、`${}$`で括ったCustom System Builderの変数も使用できます。
 - 出力結果の全文が`${text}$`に代入され、最後の1項目がロール結果として`${result}$`に代入されます。
   - 自動化は`${result}$`を使用したコードを追加することである程度実現できます。
-  - 選択したダイスボットや、ロール式によっては`${result}$`が特殊な結果になる場合がありますが、その場合はスクリプトやマクロで`${text}$`を整形して利用してください。
+  - 選択したダイスボットやロール式によっては`${result}$`が特殊な結果になる場合がありますが、その場合はスクリプトやマクロで`${text}$`を整形して利用してください。
 - BCDiceの出力結果のみを表示したい場合は「Send roll message to chat」オプションをオフにしてください。
 - ロール結果の発言者は現在選択しているトークンになります。キャラクターシートのアクターではないので注意してください。
 
 
 ## Changelog
+
+### 4.0.2
+- Fixed error in commands starting with “s”
+- Fixed dice bot dropdown not immediately reflecting
+- bug fix
 
 ### 4.0.1
 - Fixed to output return value of roll result

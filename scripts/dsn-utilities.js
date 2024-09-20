@@ -67,11 +67,14 @@ async function roll(system, formula) {
     },
     content: `${formula}`,
   };
+
+  /* error in commands starting with “s”
   const secret = formula.charAt(0).toLowerCase() === "s";
   if (secret) {
     userMessageOptions.type = 1;
     userMessageOptions.whisper = [user.id];
   }
+  */
 
   // ChatMessage.create(userMessageOptions);
   try {
@@ -139,7 +142,7 @@ async function roll(system, formula) {
     };
     if (data.secret) {
       messageOptions.type = 1;
-      messageOptions.whisper = [user.id];
+      messageOptions.whisper = [game.user.id];
     }
 
     if (game.dice3d?.isEnabled()) {

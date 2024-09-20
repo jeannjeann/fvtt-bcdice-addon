@@ -45,6 +45,7 @@ ${#%{localVars.result=`${text}$`.substring(`${text}$`.lastIndexOf("＞ ") + 2)}%
 ### 4.0.2
 - Fixed error in commands starting with “s”
 - Fixed dice bot dropdown not immediately reflecting
+- The display of BCDice help changed from chat messages to dialogs
 - bug fix
 
 ### 4.0.1

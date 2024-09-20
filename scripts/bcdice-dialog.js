@@ -153,6 +153,7 @@ export default class BCDialog extends FormApplication {
       )
       .join("\n");
 
+    /* 
     ChatMessage.create({
       content: `<p><em>${this.getSystem()}</em></p>
               <p>${helpMessage}</p>`,
@@ -160,6 +161,21 @@ export default class BCDialog extends FormApplication {
         alias: aliasText,
       },
     });
+    */
+
+    new Dialog(
+      {
+        title: `BCDice Help`,
+        content: `<p><em>${data.name}</em></p><p>${helpMessage}</p>`,
+        buttons: {},
+        default: "",
+      },
+      {
+        width: 700,
+        height: 600,
+        resizable: true,
+      }
+    ).render(true);
   }
 
   _addTab() {

@@ -138,8 +138,9 @@ export default class BCDialog extends FormApplication {
   async getSysHelp() {
     const aliasText = game.i18n.localize("fvtt-bcdice.alias");
     const data = await getHelpText(this.getSystem());
+    const defaultData = await getHelpText("DiceBot");
 
-    const helpMessage = data.help_message
+    const helpMessageCustom = data.help_message
       .trim()
       .split("\n")
       .reduce(
@@ -147,11 +148,25 @@ export default class BCDialog extends FormApplication {
           acc.push(`<p>${el}</p>`);
           return acc;
         },
-        [
-          '<p><a href="https://docs.bcdice.org/">https://docs.bcdice.org/</a></p>',
-        ]
+        [`<h3>Game System Comands</h3>`]
       )
       .join("\n");
+    const helpMessageDefault = defaultData.help_message
+      .trim()
+      .split("\n")
+      .reduce(
+        (acc, el) => {
+          acc.push(`<p>${el}</p>`);
+          return acc;
+        },
+        [`\n<p></p>\n<h3>Common Comands</h3>`]
+      )
+      .join("\n")
+      .replace(
+        `https://docs.bcdice.org/`,
+        `<a href="https://docs.bcdice.org/">https://docs.bcdice.org/</a>`
+      );
+    const helpMessage = helpMessageCustom + helpMessageDefault;
 
     /* 
     ChatMessage.create({
@@ -165,8 +180,8 @@ export default class BCDialog extends FormApplication {
 
     new Dialog(
       {
-        title: `BCDice Help`,
-        content: `<p><em>${data.name}</em></p><p>${helpMessage}</p>`,
+        title: `BCDice Help (${this.getSystem()})`,
+        content: `<h1><em>${data.name}</em></h1><p>${helpMessage}</p>`,
         buttons: {},
         default: "",
       },

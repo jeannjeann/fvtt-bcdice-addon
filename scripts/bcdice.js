@@ -146,6 +146,15 @@ async function registerSettings() {
     default: false,
   });
 
+  game.settings.register("fvtt-bcdice-addon", "result-output", {
+    name: game.i18n.localize("fvtt-bcdice.resultOutputSettingName"),
+    hint: game.i18n.localize("fvtt-bcdice.resultOutputSettingHint"),
+    scope: "world",
+    config: true,
+    type: Boolean,
+    default: true,
+  });
+
   game.settings.register("fvtt-bcdice-addon", "bc-server", {
     name: game.i18n.localize("fvtt-bcdice.serverSettingName"),
     hint: game.i18n.localize("fvtt-bcdice.serverSettingHint"),

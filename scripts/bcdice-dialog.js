@@ -19,6 +19,7 @@ export default class BCDialog extends FormApplication {
       ...super.defaultOptions,
       width: 400,
       height: "auto",
+      resizable: true,
       closeOnSubmit: false,
       submitOnClose: true,
       submitOnChange: true,

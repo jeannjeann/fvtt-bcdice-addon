@@ -5,17 +5,18 @@ const shiftCharCode = (Δ) => (c) => String.fromCharCode(c.charCodeAt(0) + Δ);
 const toHalfWidth = (str) =>
   str.replace(/[！-～]/g, shiftCharCode(-0xfee0)).replace(/　/g, " ");
 
+function getResultOutput() {
+  return game.settings.get("fvtt-bcdice-addon", "result-output");
+}
 function getSuccessColor() {
   return game.settings.get("fvtt-bcdice-addon", "success-color") ?? "#2e6dff";
 }
-
 function getFailureColor() {
   return game.settings.get("fvtt-bcdice-addon", "failure-color") ?? "#ff0077";
 }
 function getNormalColor() {
   return game.settings.get("fvtt-bcdice-addon", "normal-color") ?? "#555555";
 }
-
 function isColor(color) {
   return color.match(/^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/) !== null;
 }
@@ -156,7 +157,9 @@ async function roll(system, formula) {
       messageOptions.sound = "sounds/dice.wav";
     }
 
-    ChatMessage.create(messageOptions);
+    if (getResultOutput()) {
+      ChatMessage.create(messageOptions);
+    }
 
     const text = data.text;
     const index = text.lastIndexOf("＞ ");
@@ -168,12 +171,14 @@ async function roll(system, formula) {
       const invalidFormulaText = game.i18n.localize(
         "fvtt-bcdice.invalidFormula"
       );
-      ChatMessage.create({
-        content: `${formula}`,
-        speaker: {
-          alias: `${entity.name}`,
-        },
-      });
+      if (getResultOutput()) {
+        ChatMessage.create({
+          content: `${formula}`,
+          speaker: {
+            alias: `${entity.name}`,
+          },
+        });
+      }
     }
     //console.error(err);
     return { text: `${formula}`, result: null };

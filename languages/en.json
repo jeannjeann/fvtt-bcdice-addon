@@ -22,6 +22,8 @@
   "fvtt-bcdice.replacements": "Replacements",
   "fvtt-bcdice.replacementsHeader": "Text replacements",
   "fvtt-bcdice.replacementsTextHint": "Format is \"name=value\" per line, use \"{name}\" in a macro, the formula input or even another replacement!",
+  "fvtt-bcdice.resultOutputSettingName": "Output results",
+  "fvtt-bcdice.resultOutputSettingHint": "Output results to a chat message",
   "fvtt-bcdice.serverSettingHint": "Server Status List: https://api-status.bcdice.org/",
   "fvtt-bcdice.systemSettingName": "Game System",
   "fvtt-bcdice.tabName": "Tab Name",

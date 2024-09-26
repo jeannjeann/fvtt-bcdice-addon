@@ -22,6 +22,8 @@
   "fvtt-bcdice.replacements": "変数",
   "fvtt-bcdice.replacementsHeader": "変数を設定します（チャパレサイトで//で始まるもの）",
   "fvtt-bcdice.replacementsTextHint": "「名前=値」の形式で1行ずつ記述します。ロール式で'{名前}'を使用すると名前の部分が'値'に自動置換されます。(例)'共鳴=3'で登録しておき'{共鳴}DM<=5'でロールすると'3DM<=5'に置換されてロールされます。変数を展開して別の変数に代入も出来ます。",
+  "fvtt-bcdice.resultOutputSettingName": "結果の出力",
+  "fvtt-bcdice.resultOutputSettingHint": "結果をチャットメッセージに出力する",
   "fvtt-bcdice.serverSettingHint": "使用する API サーバーを指定します。有志の API サーバーリスト: https://api-status.bcdice.org/",
   "fvtt-bcdice.tabName": "タブ名",
   "fvtt-bcdice.save": "保存",

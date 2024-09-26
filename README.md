@@ -27,12 +27,12 @@ Please specify the letters "ManifestURL" in Mod Extensions, Module Installation,
 ## Custom System Builderで使用する方法
 「Label roll message」に以下のコードを入力することでBCDiceを経由するロールが可能になります。
 ```
-${#%{localVars.bcdformula=`ロール式`}%}$
+${#%{localVars.bcdformula=`BCDiceコマンド`}%}$
 ${#%{localVars.text=await game.modules.get("fvtt-bcdice-addon").api.customCommand("/bcd","",`${bcdformula}$`)}%}$
 ${#%{localVars.result=`${text}$`.substring(`${text}$`.lastIndexOf("＞ ") + 2)}%}$
 ```
-- ロール式の部分を任意の式に置き換えてください。
-- ロール式には`{}`で括ったチャットパレットの変数に加えて、`${}$`で括ったCustom System Builderの変数も使用できます。
+- BCDiceコマンドの部分を任意のコマンドに置き換えてください。
+- BCDiceコマンドの部分には`{}`で括ったチャットパレットの変数に加えて、`${}$`で括ったCustom System Builderの変数も使用できます。
 - 出力結果の全文が`${text}$`に代入され、最後の1項目がロール結果として`${result}$`に代入されます。
   - 自動化は`${result}$`を使用したコードを追加することである程度実現できます。
   - 選択したダイスボットやロール式によっては`${result}$`が特殊な結果になる場合がありますが、その場合はスクリプトやマクロで`${text}$`を整形して利用してください。
@@ -41,6 +41,12 @@ ${#%{localVars.result=`${text}$`.substring(`${text}$`.lastIndexOf("＞ ") + 2)}%
 
 
 ## Changelog
+
+### 4.1.0
+- Added settings for chat message output of results
+- チャパレ変数代入コマンド
+- チャパレからのオートコンプリート
+- TAH連携
 
 ### 4.0.2
 - Fixed error in commands starting with “s”

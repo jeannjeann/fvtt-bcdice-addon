@@ -46,8 +46,7 @@ ${#%{localVars.result=`${text}$`.substring(`${text}$`.lastIndexOf("＞ ") + 2)}%
 ### 4.1.0
 - Added settings for chat message output of results
 - Support replacements control command
-- チャパレからのオートコンプリート
-- TAH連携
+- Added autocomplete function in chat command (require "Chat Commander" module)
 
 ### 4.0.2
 - Fixed error in commands starting with “s”

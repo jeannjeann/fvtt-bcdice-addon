@@ -1,5 +1,6 @@
 import { showRoller, setupRoller } from "./bcroller.js";
 import { getSystems } from "./remote-api.js";
+import { getDataForCurrentEntity } from "./dsn-utilities.js";
 import { customCommand } from "./customcommand.js";
 
 let roller;
@@ -47,6 +48,35 @@ Hooks.once("init", async () => {
       callback: async (chat, parameters, messageData) => {
         await customCommand(command, messageData, parameters);
         return;
+      },
+      autocompleteCallback: (menu, alias, parameters) => {
+        const token = getDataForCurrentEntity();
+        const macro = [];
+        for (let i = 0; i < token.tabs.length; i++) {
+          for (let j = 0; j < token.tabs[i].headers.length; j++) {
+            for (let k = 0; k < token.tabs[i].headers[j].macros.length; k++) {
+              macro.push(token.tabs[i].headers[j].macros[k].macro);
+            }
+          }
+        }
+        const replacements = token.replacements
+          .split("\n")
+          .map((line) => `:${line}`);
+        const totalcandidate = [...macro, ...replacements];
+        const candidate = totalcandidate.filter((line) =>
+          line.toLowerCase().includes(parameters.toLowerCase())
+        );
+        const entries = [];
+        for (let i = 0; i < candidate.length; i++) {
+          entries.push(
+            game.chatCommands.createCommandElement(
+              `${alias} ${candidate[i]}`,
+              candidate[i]
+            )
+          );
+        }
+        entries.length = Math.min(entries.length, menu.maxEntries);
+        return entries;
       },
     });
   }

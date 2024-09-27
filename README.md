@@ -33,9 +33,10 @@ ${#%{localVars.result=`${text}$`.substring(`${text}$`.lastIndexOf("＞ ") + 2)}%
 ```
 - BCDiceコマンドの部分を任意のコマンドに置き換えてください。
 - BCDiceコマンドの部分には`{}`で括ったチャットパレットの変数に加えて、`${}$`で括ったCustom System Builderの変数も使用できます。
-- 出力結果の全文が`${text}$`に代入され、最後の1項目がロール結果として`${result}$`に代入されます。
+- ダイスロールコマンドの場合、出力結果の全文が`${text}$`に代入され、最後の1項目がロール結果として`${result}$`に代入されます。
   - 自動化は`${result}$`を使用したコードを追加することである程度実現できます。
   - 選択したダイスボットやロール式によっては`${result}$`が特殊な結果になる場合がありますが、その場合はスクリプトやマクロで`${text}$`を整形して利用してください。
+- 変数操作コマンドの場合、変数名が`${text}$`に代入され、操作後の値が`${result}$`に代入されます。
 - BCDiceの出力結果のみを表示したい場合は「Send roll message to chat」オプションをオフにしてください。
 - ロール結果の発言者は現在選択しているトークンになります。キャラクターシートのアクターではないので注意してください。
 
@@ -44,7 +45,7 @@ ${#%{localVars.result=`${text}$`.substring(`${text}$`.lastIndexOf("＞ ") + 2)}%
 
 ### 4.1.0
 - Added settings for chat message output of results
-- チャパレ変数代入コマンド
+- Support replacements control command
 - チャパレからのオートコンプリート
 - TAH連携
 

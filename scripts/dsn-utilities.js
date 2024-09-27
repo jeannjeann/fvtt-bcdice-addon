@@ -69,6 +69,39 @@ async function roll(system, formula) {
     content: `${formula}`,
   };
 
+  // variable change command
+  const chVar = formula.charAt(0) === ":";
+  if (chVar) {
+    const result = await changeReplacements(formula);
+
+    let normalColor = getNormalColor();
+    if (isColor(normalColor) === false) {
+      normalColor = "#555555";
+    }
+    const message = `<div><i class="fas fa-dice"></i> 
+                        ${formula}
+                        <p class="success-normal" style="color: ${normalColor}">
+                          ${result.key} : ${result.prev} > ${result.new}
+                        </p>
+                      </div>`;
+
+    const messageOptions = {
+      content: message,
+      speaker: {
+        // alias: `${system}`,
+        alias: `${entity.name}`,
+      },
+    };
+
+    if (getResultOutput()) {
+      ChatMessage.create(messageOptions);
+    }
+
+    const chVarText = result.key;
+    const chVarResult = result.new;
+    return { text: chVarText, result: chVarResult };
+  }
+
   /* error in commands starting with “s”
   const secret = formula.charAt(0).toLowerCase() === "s";
   if (secret) {
@@ -209,6 +242,91 @@ function getDataForCurrentEntity() {
       replacements: "",
     }
   );
+}
+
+// change variable function
+async function changeReplacements(formula) {
+  const token = getDataForCurrentEntity();
+  const currentReplacements =
+    "," + token.replacements.replace(/\n/g, ",") + ",";
+
+  // command formatting
+  let targetKey, newValue;
+  const replaceFormula = formula.replace(/^:/, "");
+  const calc = replaceFormula.match(/([+\-*/=])/);
+  if (calc) {
+    const calcIndex = calc.index;
+    targetKey = replaceFormula.slice(0, calcIndex);
+    newValue = replaceFormula.slice(calcIndex);
+  } else {
+    targetKey = replaceFormula;
+    newValue = null;
+  }
+
+  // search replacement
+  let prevReplacement, matchKey, prevValue;
+  const searchReplacement = new RegExp(
+    `(?:^|,)\\s*(${targetKey})\\s*=\\s*([^,]*)(?=,|$)`
+  );
+  const matchReplacement = currentReplacements.match(searchReplacement);
+  if (matchReplacement) {
+    prevReplacement = matchReplacement[0].replace(/^,/, "");
+    matchKey = matchReplacement[1];
+    prevValue = matchReplacement[2];
+  } else {
+    prevReplacement = null;
+    matchKey = null;
+    prevValue = null;
+  }
+
+  // calculate value
+  let newReplacement, resultValue;
+  if (targetKey == "") {
+    return;
+  } else if (!newValue) {
+    if (!prevValue) {
+      newReplacement = `${targetKey}=0`;
+      resultValue = 0;
+    } else {
+      newReplacement = `${prevReplacement}`;
+      resultValue = prevValue;
+    }
+  } else if (newValue.startsWith("=")) {
+    resultValue = newValue.replace(/^=/, "");
+    if (!isNaN(eval(resultValue))) resultValue = eval(resultValue);
+    newReplacement = `${targetKey}=${resultValue}`;
+  } else {
+    if (!isNaN(Number(prevValue)) && !isNaN(Number(newValue))) {
+      resultValue = Number(prevValue) + Number(newValue);
+    } else {
+      resultValue = prevValue + newValue;
+      try {
+        if (!isNaN(eval(resultValue))) resultValue = eval(resultValue);
+      } catch (error) {}
+    }
+    newReplacement = `${targetKey}=${resultValue}`;
+  }
+
+  let newReplacements;
+  if (matchKey) {
+    newReplacements = currentReplacements.replace(
+      new RegExp(
+        `,\\s*(${prevReplacement.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")})\\s*`,
+        "g"
+      ),
+      `,${newReplacement}`
+    );
+  } else newReplacements = `${currentReplacements}${newReplacement},`;
+
+  // update replacements
+  let replacements = newReplacements.replace(/^,|,$/g, "").replace(/,/g, "\n");
+  const data = mergeObject(
+    getDataForCurrentEntity(),
+    expandObject({ replacements })
+  );
+  await getCurrentDocument().setFlag("fvtt-bcdice-addon", "macro-data", data);
+
+  return { key: targetKey, prev: prevValue, new: resultValue };
 }
 
 export {

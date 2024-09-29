@@ -30,6 +30,7 @@ Hooks.once("init", async () => {
   registerKeybinds();
 
   game.modules.get("fvtt-bcdice-addon").api = {
+    getDataForCurrentEntity,
     customCommand,
   };
 

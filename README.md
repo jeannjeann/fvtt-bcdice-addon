@@ -40,13 +40,16 @@ ${#%{localVars.result=`${text}$`.substring(`${text}$`.lastIndexOf("＞ ") + 2)}%
 - BCDiceの出力結果のみを表示したい場合は「Send roll message to chat」オプションをオフにしてください。
 - ロール結果の発言者は現在選択しているトークンになります。キャラクターシートのアクターではないので注意してください。
 
+## Token Action HUD 対応
+- [Token Action HUD BCDice](https://foundryvtt.com/packages/token-action-hud-bcdice)に対応（[Token Action HUD Core](https://foundryvtt.com/packages/token-action-hud-core)が必要）
 
-## Changelog
+# Changelog
 
 ### 4.1.0
 - Added settings for chat message output of results
-- Support replacements control command
+- Support replacements control command starting with “:”
 - Added autocomplete function in chat command (require "Chat Commander" module)
+- Support "Token Action HUD" module
 
 ### 4.0.2
 - Fixed error in commands starting with “s”

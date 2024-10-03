@@ -46,7 +46,7 @@ ${#%{localVars.result=`${text}$`.substring(`${text}$`.lastIndexOf("＞ ") + 2)}%
 # Changelog
 
 ### 4.1.1
-- 目標値に変数が使えないバグ
+- Fix replacements control command
 
 ### 4.1.0
 - Added settings for chat message output of results

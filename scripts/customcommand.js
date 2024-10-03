@@ -7,6 +7,7 @@ const replacementRegex = /\{\s*([^\}]+)\s*\}/g;
  */
 export async function customCommand(command, messageData, parameters) {
   let rollFormula = parameters || "";
+  let orgFormula = parameters || "";
 
   if (rollFormula !== "") {
     const system =
@@ -21,7 +22,7 @@ export async function customCommand(command, messageData, parameters) {
       });
     }
 
-    const results = await roll(system, rollFormula);
+    const results = await roll(system, rollFormula, orgFormula);
     const result = await getResult(system, results);
     return result;
   }

@@ -125,6 +125,7 @@ export default class BCDialog extends FormApplication {
 
   async roll(macro) {
     let replacedMacro = macro;
+    let orgMacro = macro;
     const replacements = this.replacements;
     const set = new Set();
     while (replacedMacro.match(replacementRegex)) {
@@ -133,7 +134,7 @@ export default class BCDialog extends FormApplication {
         return replacements[token] ?? "";
       });
     }
-    const results = await roll(this.getSystem(), replacedMacro);
+    const results = await roll(this.getSystem(), replacedMacro, orgMacro);
   }
 
   async getSysHelp() {

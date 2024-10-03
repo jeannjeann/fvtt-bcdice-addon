@@ -59,7 +59,7 @@ function appendDSNRoll(acc, value, sides) {
   return acc;
 }
 
-async function roll(system, formula) {
+async function roll(system, formula, orgFormula) {
   const aliasText = `{${system}`;
   const entity = getCurrentDocument();
   const userMessageOptions = {
@@ -72,16 +72,18 @@ async function roll(system, formula) {
   // variable change command
   const chVar = formula.charAt(0) === ":";
   if (chVar) {
-    const result = await changeReplacements(formula);
+    const result = await changeReplacements(formula, orgFormula);
 
     let normalColor = getNormalColor();
     if (isColor(normalColor) === false) {
       normalColor = "#555555";
     }
+    let resultMessage = `${result.prev} → ${result.new}`;
+    if (result.prev == result.new) resultMessage = `${result.prev}`;
     const message = `<div><i class="fas fa-dice"></i> 
                         ${formula}
                         <p class="success-normal" style="color: ${normalColor}">
-                          ${result.key} : ${result.prev} > ${result.new}
+                          ${result.key} : ${resultMessage}
                         </p>
                       </div>`;
 
@@ -245,19 +247,20 @@ function getDataForCurrentEntity() {
 }
 
 // change variable function
-async function changeReplacements(formula) {
+async function changeReplacements(formula, orgFormula) {
   const token = getDataForCurrentEntity();
   const currentReplacements =
     "," + token.replacements.replace(/\n/g, ",") + ",";
 
   // command formatting
-  let targetKey, newValue;
+  let targetKey, newValue, orgNewValue;
   const replaceFormula = formula.replace(/^:/, "");
   const calc = replaceFormula.match(/([+\-*/=])/);
   if (calc) {
     const calcIndex = calc.index;
     targetKey = replaceFormula.slice(0, calcIndex);
     newValue = replaceFormula.slice(calcIndex);
+    orgNewValue = orgFormula.replace(/^:/, "").slice(calcIndex);
   } else {
     targetKey = replaceFormula;
     newValue = null;
@@ -292,8 +295,8 @@ async function changeReplacements(formula) {
       resultValue = prevValue;
     }
   } else if (newValue.startsWith("=")) {
-    resultValue = newValue.replace(/^=/, "");
-    if (!isNaN(eval(resultValue))) resultValue = eval(resultValue);
+    resultValue = orgNewValue.replace(/^=/, "");
+    //if (!isNaN(eval(resultValue))) resultValue = eval(resultValue);
     newReplacement = `${targetKey}=${resultValue}`;
   } else {
     if (!isNaN(Number(prevValue)) && !isNaN(Number(newValue))) {

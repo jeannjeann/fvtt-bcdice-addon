@@ -2,6 +2,7 @@ import { showRoller, setupRoller } from "./bcroller.js";
 import { getSystems } from "./remote-api.js";
 import { getDataForCurrentEntity } from "./dsn-utilities.js";
 import { customCommand } from "./customcommand.js";
+import { toBCD } from "./syncvariable.js";
 
 let roller;
 const command = "/bcd";
@@ -112,6 +113,17 @@ Hooks.on("renderSceneControls", async function () {
   }
 });
 
+// Actor's variable hook
+Hooks.on("updateActor", (actor, updateData, options, userId) => {
+  // CSB cooperation
+  let csbcoop = game.settings.get("fvtt-bcdice-addon", "csb-cooperation");
+  if (csbcoop) {
+    const actorid = actor._id;
+    const data = updateData.system.props;
+    toBCD(actorid, data);
+  }
+});
+
 async function registerKeybinds() {
   game.keybindings.register("fvtt-bcdice-addon", "open", {
     name: game.i18n.localize("fvtt-bcdice.keybindName"),
@@ -159,6 +171,32 @@ const onClickInlineRollButton = (event) => {
 };
 
 async function registerSettings() {
+  game.settings.registerMenu("fvtt-bcdice-addon", "syncsettings", {
+    name: game.i18n.localize("fvtt-bcdice.syncSettingsName"),
+    hint: game.i18n.localize("fvtt-bcdice.syncSettingshint"),
+    label: game.i18n.localize("fvtt-bcdice.syncSettingsLabel"),
+    icon: "fas fa-cog",
+    scope: "world",
+    type: syncSettings,
+    restricted: true,
+  });
+
+  game.settings.register("fvtt-bcdice-addon", "syncValue", {
+    scope: "world",
+    config: false,
+    type: String,
+    default: "",
+  });
+
+  game.settings.register("fvtt-bcdice-addon", "csb-cooperation", {
+    name: game.i18n.localize("fvtt-bcdice.csbCooperationName"),
+    hint: game.i18n.localize("fvtt-bcdice.csbCooperationHint"),
+    scope: "world",
+    config: true,
+    type: Boolean,
+    default: false,
+  });
+
   game.settings.register("fvtt-bcdice-addon", "roller-persistance", {
     name: game.i18n.localize("fvtt-bcdice.persistanceSettingName"),
     hint: game.i18n.localize("fvtt-bcdice.persistanceSettingHint"),
@@ -238,4 +276,41 @@ async function registerSettings() {
     choices: systems,
     default: data[0].id,
   });
+}
+
+// Sync Setting Dialog
+class syncSettings extends FormApplication {
+  constructor(object = {}, options = {}) {
+    super(object, options);
+    this.sync = "";
+  }
+  static get defaultOptions() {
+    return mergeObject(super.defaultOptions, {
+      title: game.i18n.localize("fvtt-bcdice.syncSettings"),
+      id: "syncsettings",
+      template: "modules/fvtt-bcdice-addon/templates/sync.html",
+      width: 500,
+      height: 400,
+      resizable: true,
+      closeOnSubmit: true,
+    });
+  }
+
+  async getData() {
+    this.sync =
+      (await game.settings.get("fvtt-bcdice-addon", "syncValue")) || "";
+    return {
+      sync: this.sync,
+    };
+  }
+
+  activateListeners(html) {
+    super.activateListeners(html);
+    html.find('button[data-button="save"]').click(async (ev) => {
+      const syncValue = html.find('textarea[name="sync"]').val();
+      this.sync = syncValue;
+      await game.settings.set("fvtt-bcdice-addon", "syncValue", this.sync);
+      this.close();
+    });
+  }
 }

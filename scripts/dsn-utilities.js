@@ -1,5 +1,6 @@
 import { APIError } from "./errors.js";
 import { getRoll } from "./remote-api.js";
+import { toCSB } from "./syncvariable.js";
 
 const shiftCharCode = (Δ) => (c) => String.fromCharCode(c.charCodeAt(0) + Δ);
 const toHalfWidth = (str) =>
@@ -78,8 +79,8 @@ async function roll(system, formula, orgFormula) {
     if (isColor(normalColor) === false) {
       normalColor = "#555555";
     }
-    let resultMessage = `${result.prev} → ${result.new}`;
-    if (result.prev == result.new) resultMessage = `${result.prev}`;
+    let resultMessage = `${result.prev} ＞ ${result.new}`;
+    if (result.prev == result.new) resultMessage = `＞ ${result.prev}`;
     const message = `<div><i class="fas fa-dice"></i> 
                         ${formula}
                         <p class="success-normal" style="color: ${normalColor}">
@@ -99,7 +100,15 @@ async function roll(system, formula, orgFormula) {
       ChatMessage.create(messageOptions);
     }
 
-    const chVarText = result.key;
+    // CSB cooperation
+    let csbcoop = game.settings.get("fvtt-bcdice-addon", "csb-cooperation");
+    if (csbcoop) {
+      const actorid = entity.actorId;
+      const data = result;
+      toCSB(actorid, data);
+    }
+
+    const chVarText = `${result.key} : ${resultMessage}`;
     const chVarResult = result.new;
     return { text: chVarText, result: chVarResult };
   }
@@ -216,7 +225,7 @@ async function roll(system, formula, orgFormula) {
       }
     }
     //console.error(err);
-    return { text: `${formula}`, result: null };
+    return { text: `${formula} ＞ Not Command`, result: null };
   }
 }
 

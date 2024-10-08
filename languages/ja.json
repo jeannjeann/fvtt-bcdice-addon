@@ -27,6 +27,9 @@
   "fvtt-bcdice.serverSettingHint": "使用する API サーバーを指定します。有志の API サーバーリスト: https://api-status.bcdice.org/",
   "fvtt-bcdice.tabName": "タブ名",
   "fvtt-bcdice.save": "保存",
+  "fvtt-bcdice.syncSettings": "同期設定",
+  "fvtt-bcdice.syncSettingsHeader": "Custom System Builderと同期する変数を設定します",
+  "fvtt-bcdice.syncSettingsTextHint": "「BCDiceの変数名 : CSBのCompornent key」という「:」区切りの形式で1行ずつ記述します。CSB側がDynamicTable内の変数である場合、「BCDiceの変数名:DynamicTableのCommentkey, 判別用FieldのCompornentkey, 同期対象FieldのCompornentkey」となります。",
   "fvtt-bcdice.systemSettingName": "デフォルトのダイスボット",
   "fvtt-bcdice.systemSettingHint": "このワールドで使用するデフォルトのダイスボットを選択します。",
   "fvtt-bcdice.deleteTabBody": "このタブを削除しますか？ このタブに含まれるロール式とカテゴリーが全て削除されます。",
@@ -49,5 +52,10 @@
   "fvtt-bcdice.SuccessColorSettingSettingHint": "ダイスロール結果が '成功' だった場合の文字色を指定します。初期値: #2667ff",
   "fvtt-bcdice.FailureColorSettingName": "'失敗' の文字色",
   "fvtt-bcdice.FailureColorSettingHint": "ダイスロール結果が '失敗' だった場合の文字色を指定します。初期値: #ff0077",
+  "fvtt-bcdice.csbCooperationName": "CustomSystemBuilder連携",
+  "fvtt-bcdice.csbCooperationHint": "有効にすると、BCDiceの変数とCSBの変数の双方向同期を行います。同期対象変数の設定が必要です。",
+  "fvtt-bcdice.syncSettingsName": "同期対象変数設定",
+  "fvtt-bcdice.syncSettingshint": "CustomSystemBuilder連携時の同期対象変数を設定します。",
+  "fvtt-bcdice.syncSettingsLabel": "同期対象変数設定",
   "fvtt-bcdice.importReplacements": "変数を分離して同時にインポートする"
 }

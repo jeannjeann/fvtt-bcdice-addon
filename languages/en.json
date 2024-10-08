@@ -28,6 +28,9 @@
   "fvtt-bcdice.systemSettingName": "Game System",
   "fvtt-bcdice.tabName": "Tab Name",
   "fvtt-bcdice.save": "Save",
+  "fvtt-bcdice.syncSettings": "Sync Settings",
+  "fvtt-bcdice.syncSettingsHeader": "Set variables to synchronize with Custom System Builder",
+  "fvtt-bcdice.syncSettingsTextHint": "The description is written on each line in a \":\" delimited format like \"Variable name of BCDice : Compornent key of CSB\". If the CSB side is a variable in DynamicTable, it is \"Variable name of BCDice: Commentkey of DynamicTable, Comparnentkey of discriminative field, Comparnentkey of synchronization target field\".",
   "fvtt-bcdice.systemSettingHint": "Set the default system to be used",
   "fvtt-bcdice.deleteTabBody": "Are you sure you want to delete this tab, with all it's headers and macros?",
   "fvtt-bcdice.newTab": "New Tab",
@@ -49,5 +52,10 @@
   "fvtt-bcdice.SuccessColorSettingSettingHint": "Specifies the text color when the die roll result is 'success'. default: #2667ff",
   "fvtt-bcdice.FailureColorSettingName": "'Failure' font-color",
   "fvtt-bcdice.FailureColorSettingHint": "Specifies the text color when the die roll result is 'failure'. default: #ff0077",
+  "fvtt-bcdice.csbCooperationName": "Custom System Builder Cooperation",
+  "fvtt-bcdice.csbCooperationHint": "When turned on, synchronization of BCDice replacements and Custom System Builder variables is performed. Variables to be synchronized must be configured.",
+  "fvtt-bcdice.syncSettingsName": "Sync Settings",
+  "fvtt-bcdice.syncSettingshint": "Set variables to be synchronized during Custom System Builder Cooperation.",
+  "fvtt-bcdice.syncSettingsLabel": "Sync Settings",
   "fvtt-bcdice.importReplacements": "Separate replacements and import them at the same time"
 }

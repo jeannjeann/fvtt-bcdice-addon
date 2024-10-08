@@ -24,7 +24,10 @@ https://github.com/jeannjeann/fvtt-bcdice-addon/releases/latest/download/module.
 
 Please specify the letters "ManifestURL" in Mod Extensions, Module Installation, Specify URL and install.
 
-## Custom System Builderで使用する方法
+## Custom System Builderとの連携
+
+### 使用方法
+
 「Label roll message」に以下のコードを入力することでBCDiceを経由するロールが可能になります。
 ```
 ${#%{localVars.bcdformula=`BCDiceコマンド`}%}$
@@ -40,10 +43,35 @@ ${#%{localVars.result=`${text}$`.substring(`${text}$`.lastIndexOf("＞ ") + 2)}%
 - BCDiceの出力結果のみを表示したい場合は「Send roll message to chat」オプションをオフにしてください。
 - ロール結果の発言者は現在選択しているトークンになります。キャラクターシートのアクターではないので注意してください。
 
+### 変数同期
+
+設定で「CustomSystemBuilder連携」を有効にすると、BCDiceの変数とCSBの変数の双方向同期を行えるようになります。
+- BCDice側の変数は事前に作成しておく必要があります。自動で作成されません。
+- 各変数が変更された時に同期する仕組みです。常時監視して同期しているわけではないので注意してください。
+
+同期対象の変数を設定する必要があります。
+- 「BCDiceの変数名 : CSBのCompornent key」という「:」区切りの形式で1行ずつ記述します。
+- CSB側がDynamicTable内の変数である場合、「BCDiceの変数名:DynamicTableのCommentkey, 判別用FieldのCompornentkey, 同期対象FieldのCompornentkey」となります。
+- 設定はインポート、エクスポートできます。
+
+設定例：
+```
+HP : currenthp
+敏捷 : attributes, name_attributes, value_attributes
+```
+- この例では、以下の2つの変数が同期されます。
+  - BCDiceの変数「HP」と、CSBのkey「currenthp」の値
+  - BCDiceの変数「敏捷」と、CSBのkey「attributes」のDynamicTable内のkey「name_attributes」欄が「敏捷」である行のkey「value_attributes」欄の値
+
 ## Token Action HUD 対応
 - [Token Action HUD BCDice](https://foundryvtt.com/packages/token-action-hud-bcdice)に対応（[Token Action HUD Core](https://foundryvtt.com/packages/token-action-hud-core)が必要）
 
 # Changelog
+
+### 4.2.0
+- Added function to synchronize variables with Custom System Builder
+- Fix replacements control command
+- bug fix
 
 ### 4.1.1
 - Fix replacements control command

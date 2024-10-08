@@ -1,0 +1,15 @@
+<form style="display: flex; flex-direction: column; height: 100%;">
+  <div style="flex-grow: 1; display: flex; flex-direction: column;">
+    <label>
+      {{localize "fvtt-bcdice.syncSettingsHeader"}}
+    </label>
+    <p>{{localize "fvtt-bcdice.syncSettingsTextHint"}}</p>
+    <textarea name="sync" style="flex-grow: 1; width: 100%; resize: none;">{{sync}}</textarea>
+  </div>
+  
+  <div style="text-align: right; padding-top: 10px;">
+    <button data-button="save" type="button">
+      <i class="fas fa-save"></i>{{localize "fvtt-bcdice.save"}}
+    </button>
+  </div>
+</form>

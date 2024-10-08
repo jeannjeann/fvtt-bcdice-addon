@@ -6,6 +6,7 @@
   "fvtt-bcdice.deleteThisTab": "このタブを削除する",
   "fvtt-bcdice.edit": "編集",
   "fvtt-bcdice.enterFormula": "ロール式",
+  "fvtt-bcdice.export": "エクスポート",
   "fvtt-bcdice.headerMarker": "カテゴリー名の開始記号",
   "fvtt-bcdice.headerTrim": "カテゴリー名の終了記号",
   "fvtt-bcdice.import": "インポート",

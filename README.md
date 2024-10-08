@@ -52,7 +52,6 @@ ${#%{localVars.result=`${text}$`.substring(`${text}$`.lastIndexOf("＞ ") + 2)}%
 同期対象の変数を設定する必要があります。
 - 「BCDiceの変数名 : CSBのCompornent key」という「:」区切りの形式で1行ずつ記述します。
 - CSB側がDynamicTable内の変数である場合、「BCDiceの変数名:DynamicTableのCommentkey, 判別用FieldのCompornentkey, 同期対象FieldのCompornentkey」となります。
-- 設定はインポート、エクスポートできます。
 
 設定例：
 ```

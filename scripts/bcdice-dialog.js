@@ -469,8 +469,32 @@ export default class BCDialog extends FormApplication {
             },
           },
         },
+        render: (html) => {
+          const dialog = html.closest(".dialog");
+          dialog.css({
+            display: "flex",
+            flexDirection: "column",
+            height: "100%",
+          });
+          const content = dialog.find(".dialog-content");
+          content.css({
+            flexGrow: 1,
+            overflow: "hidden",
+            display: "flex",
+            flexDirection: "column",
+          });
+          const textarea = html.find("textarea[name=replacements]");
+          textarea.css({ flexGrow: 1, height: "100%", overflow: "auto" });
+          const buttons = dialog.find(".dialog-buttons");
+          buttons.css({
+            flexGrow: 0,
+            padding: "10px 0 0 0",
+            display: "flex",
+            justifyContent: "flex-end",
+          });
+        },
       },
-      { width: 500, height: 360 }
+      { width: 500, height: 360, resizable: true }
     );
     this.dialog.render(true);
   }

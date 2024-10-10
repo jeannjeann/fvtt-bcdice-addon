@@ -67,6 +67,12 @@ HP : currenthp
 
 # Changelog
 
+### 4.3.0
+- チャパレのアクター紐付け
+- Replacements dialog to resizable
+- Remove the label for macros
+- bug fix
+
 ### 4.2.0
 - Added function to synchronize variables with Custom System Builder
 - Fix replacements control command

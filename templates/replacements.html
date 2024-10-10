@@ -1,7 +1,9 @@
-<div>
-  <label>
-    {{localize "fvtt-bcdice.replacementsHeader"}}
-  </label>
-  <p>{{localize "fvtt-bcdice.replacementsTextHint"}}</p>
-  <textarea name="replacements">{{replacements}}</textarea>
-</div>
+<form style="display: flex; flex-direction: column; height: 100%;">
+  <div style="flex-grow: 1; display: flex; flex-direction: column; height: 100%;">
+    <label>{{localize "fvtt-bcdice.replacementsHeader"}}</label>
+    <p>{{localize "fvtt-bcdice.replacementsTextHint"}}</p>
+    <textarea name="replacements" style="flex-grow: 1; width: 100%; resize: none; overflow: auto;">{{replacements}}</textarea>
+  </div>
+  <div class="dialog-buttons" style="display: flex; justify-content: flex-end; padding: 10px 0 0 0;">
+  </div>
+</form>

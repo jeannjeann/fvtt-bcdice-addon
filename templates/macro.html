@@ -23,7 +23,7 @@
       {{#each headerGroup.macros as |macro macroID|}}
         {{#if @root.editing}}
           <div class="flexrow">
-            <input type="text" name="tabs.{{../../tabID}}.headers.{{headerID}}.macros.{{macroID}}.display" value="{{macro.display}}">
+            {{!--<input type="text" name="tabs.{{../../tabID}}.headers.{{headerID}}.macros.{{macroID}}.display" value="{{macro.display}}">--}}
             <input type="text" name="tabs.{{../../tabID}}.headers.{{headerID}}.macros.{{macroID}}.macro" value="{{macro.macro}}">
             <a class="flex0" data-delete-macro="{{../../tabID}}-{{headerID}}-{{macroID}}">
               <i class="fa fa-trash-alt"></i>
@@ -31,7 +31,8 @@
           </div>
         {{else}}
           <button class="bcd-macro-button" type="button" data-macro="{{../../tabID}}-{{headerID}}-{{macroID}}">
-            {{macro.display}} - {{macro.macro}}
+            {{!--{{macro.display}} - {{macro.macro}}--}}
+            {{macro.macro}}
           </button>
         {{/if}}
       {{/each}}

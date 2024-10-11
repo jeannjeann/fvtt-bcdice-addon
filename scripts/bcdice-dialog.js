@@ -33,8 +33,10 @@ export default class BCDialog extends FormApplication {
           initial: "macro-0",
         },
       ],
+      id: "BCDialog",
     };
   }
+
   _getHeaderButtons() {
     /** @type {Array} */
     const buttons = super._getHeaderButtons();
@@ -64,8 +66,16 @@ export default class BCDialog extends FormApplication {
   }
 
   async getData() {
-    const macros = getDataForCurrentEntity();
-    const entity = getCurrentDocument();
+    await Promise.race([
+      new Promise((resolve) => {
+        Hooks.once("controlToken", resolve);
+      }),
+      new Promise((resolve) => {
+        setTimeout(resolve, 100);
+      }),
+    ]);
+    const macros = await getDataForCurrentEntity();
+    const entity = await getCurrentDocument();
     return {
       editing: this.options.isEditable ?? false,
       systems: await getSystems(),

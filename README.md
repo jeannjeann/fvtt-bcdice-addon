@@ -67,7 +67,7 @@ HP : currenthp
 
 # Changelog
 
-### 4.3.0
+### 4.2.1
 - チャパレのアクター紐付け
 - Replacements dialog to resizable
 - Remove the label for macros

@@ -68,10 +68,9 @@ HP : currenthp
 # Changelog
 
 ### 4.2.1
-- チャパレのアクター紐付け
 - Replacements dialog to resizable
 - Remove the label for macros
-- bug fix
+- bug fix in loading macros when switching tokens
 
 ### 4.2.0
 - Added function to synchronize variables with Custom System Builder

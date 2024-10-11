@@ -68,7 +68,7 @@ HP : currenthp
 # Changelog
 
 ### 4.3.0
-- チャパレのアクター紐付け　アクター設定の窓口、トークン作成時のデータ継承、リンクトークンからアクターへのデータフィードバック
+- Added the function of linking actor macros and token macros
 - bug fix
 
 ### 4.2.1

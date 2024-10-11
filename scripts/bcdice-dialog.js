@@ -5,6 +5,7 @@ import {
 } from "./dsn-utilities.js";
 import MacroParser from "./macro-parser.js";
 import { getHelpText, getSystems } from "./remote-api.js";
+import { ActorDialog } from "./bcdice.js";
 
 const replacementRegex = /\{\s*([^\}]+)\s*\}/g;
 
@@ -35,6 +36,11 @@ export default class BCDialog extends FormApplication {
       ],
       id: "BCDialog",
     };
+  }
+
+  async close(options = {}) {
+    ActorDialog.setActor(false);
+    return super.close(options);
   }
 
   _getHeaderButtons() {

@@ -113,15 +113,65 @@ Hooks.on("renderSceneControls", async function () {
   }
 });
 
-// Actor's variable hook
-Hooks.on("updateActor", (actor, updateData, options, userId) => {
+// Add ActorSheet button
+Hooks.on("getActorSheetHeaderButtons", (app, buttons) => {
+  buttons.unshift({
+    icon: "fas fa-dice",
+    class: "open-bcdice",
+    label: "BCDice",
+    onclick: function openBCDice(event) {
+      const actor = app.object;
+      if (!app.token) {
+        ActorDialog.setActor(actor);
+      }
+      showRoller(roller);
+    },
+  });
+});
+
+// Actor update hook
+Hooks.on("updateActor", async (actor, updateData, options, userId) => {
   // CSB cooperation
   let csbcoop = game.settings.get("fvtt-bcdice-addon", "csb-cooperation");
   if (csbcoop) {
     const actorid = actor._id;
-    const data = updateData.system.props;
-    toBCD(actorid, data);
+    const data = updateData?.system?.props;
+    if (data) {
+      toBCD(actorid, data);
+    }
   }
+
+  // Sync to Token
+  const bcdiceFlags = actor.flags["fvtt-bcdice-addon"];
+  const tokens = canvas.tokens.placeables.filter(
+    (token) => token.actor?.id === actor.id && token.document.actorLink
+  );
+  for (const token of tokens) {
+    await token.document.update({ [`flags.fvtt-bcdice-addon`]: bcdiceFlags });
+  }
+});
+
+// Token create hook
+Hooks.on("createToken", async (tokenDocument, options, userId) => {
+  // add macro to Token
+  const actor = tokenDocument.actor;
+  if (!actor) return;
+  const bcdiceFlags = actor.flags["fvtt-bcdice-addon"];
+  await tokenDocument.update({
+    [`flags.fvtt-bcdice-addon`]: bcdiceFlags,
+  });
+});
+
+// Token update hook
+Hooks.on("updateToken", async (tokenDocument, updateData, options, userId) => {
+  // Sync to Actor
+  const actor = tokenDocument.actor;
+  const actorLink = tokenDocument.actorLink;
+  if (!actor || !actorLink) return;
+  const bcdiceFlags = updateData.flags["fvtt-bcdice-addon"];
+  await actor.update({
+    [`flags.fvtt-bcdice-addon`]: bcdiceFlags,
+  });
 });
 
 async function registerKeybinds() {
@@ -312,5 +362,16 @@ class syncSettings extends FormApplication {
       await game.settings.set("fvtt-bcdice-addon", "syncValue", this.sync);
       this.close();
     });
+  }
+}
+
+// Actor dialog flag
+export class ActorDialog {
+  static isActor = null;
+  static setActor(actor) {
+    ActorDialog.isActor = actor;
+  }
+  static getActor() {
+    return ActorDialog.isActor;
   }
 }

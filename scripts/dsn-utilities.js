@@ -1,6 +1,7 @@
 import { APIError } from "./errors.js";
 import { getRoll } from "./remote-api.js";
 import { toCSB } from "./syncvariable.js";
+import { ActorDialog } from "./bcdice.js";
 
 const shiftCharCode = (Δ) => (c) => String.fromCharCode(c.charCodeAt(0) + Δ);
 const toHalfWidth = (str) =>
@@ -234,6 +235,10 @@ async function roll(system, formula, orgFormula) {
  * @returns current entity document
  */
 function getCurrentDocument() {
+  const actor = ActorDialog.getActor();
+  if (actor) {
+    return actor;
+  }
   if (
     canvas?.tokens?.controlled.length === 1 &&
     (game.user.isGM ||

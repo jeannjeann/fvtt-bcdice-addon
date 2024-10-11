@@ -67,6 +67,10 @@ HP : currenthp
 
 # Changelog
 
+### 4.3.0
+- チャパレのアクター紐付け　アクター設定の窓口、トークン作成時のデータ継承、リンクトークンからアクターへのデータフィードバック
+- bug fix
+
 ### 4.2.1
 - Replacements dialog to resizable
 - Remove the label for macros

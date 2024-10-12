@@ -67,6 +67,9 @@ HP : currenthp
 
 # Changelog
 
+### 4.3.1
+- bug fix
+
 ### 4.3.0
 - Added the function of linking actor macros and token macros
 - bug fix

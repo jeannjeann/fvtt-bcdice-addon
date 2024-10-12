@@ -18,16 +18,16 @@ export async function toBCD(actorid, data) {
     key: key,
     value: value,
   }));
-  let key, value, newReplacement;
+  let key, value;
+  let newReplacement = [];
   for (let i = 0; i < csb.length; i++) {
     for (let j = 0; j < syncSettings.length; j++) {
       let dtflag = typeof csb[i].value === "object" && csb[i].value !== null;
       if (!dtflag) {
         if (csb[i].key == syncSettings[j].csb) {
-          if (key) console.warn(`Key conflict: ${key} (${actorid})`);
           key = syncSettings[j].bcd;
           value = csb[i].value;
-          newReplacement = `${key}=${value}`;
+          newReplacement.push(`${key}=${value}`);
         }
       } else if (syncSettings[j].csb.includes(",")) {
         const csbkey = syncSettings[j].csb
@@ -40,28 +40,38 @@ export async function toBCD(actorid, data) {
             if (dtkey[k][csbkey[1]] == syncSettings[j].bcd) {
               key = syncSettings[j].bcd;
               value = dtkey[k][csbkey[2]];
-              newReplacement = `${key}=${value}`;
+              newReplacement.push(`${key}=${value}`);
             }
           }
         }
       }
     }
   }
-  let prevKey, prevValue, prevReplacement;
-  if (key) {
-    for (let i = 0; i < bcd.length; i++) {
-      if (bcd[i].key == key) {
-        if (prevKey) console.warn(`Key conflict: ${prevKey} (${actorid})`);
-        prevKey = bcd[i].key;
-        prevValue = bcd[i].value;
-        prevReplacement = `${prevKey}=${prevValue}`;
+  let prevKey, prevValue;
+  let prevReplacement = [];
+  for (let i = 0; i < newReplacement.length; i++) {
+    let matchkey = newReplacement[i].split("=")[0];
+    for (let j = 0; j < bcd.length; j++) {
+      if (bcd[j].key == matchkey) {
+        prevKey = bcd[j].key;
+        prevValue = bcd[j].value;
+        prevReplacement[i] = `${prevKey}=${prevValue}`;
       }
     }
   }
   // update replacements
   if (prevReplacement && newReplacement) {
-    let prevRplacements = getDataForCurrentEntity().replacements;
-    let replacements = prevRplacements.replace(prevReplacement, newReplacement);
+    let replacements = getDataForCurrentEntity().replacements;
+    for (let i = 0; i < newReplacement.length; i++) {
+      if (!prevReplacement[i]) {
+        console.warn(`No key: ${newReplacement[i]} (${actorid})`);
+      } else {
+        replacements = replacements.replace(
+          prevReplacement[i],
+          newReplacement[i]
+        );
+      }
+    }
     const data = mergeObject(
       getDataForCurrentEntity(),
       expandObject({ replacements })
@@ -78,7 +88,6 @@ export async function toCSB(actorid, data) {
   let key, value, dtflag;
   for (let i = 0; i < syncSettings.length; i++) {
     if (syncSettings[i].bcd == data.key) {
-      if (key) console.warn(`Key conflict: ${key} (${actorid})`);
       if (!syncSettings[i].csb.includes(",")) {
         dtflag = false;
         key = syncSettings[i].csb;

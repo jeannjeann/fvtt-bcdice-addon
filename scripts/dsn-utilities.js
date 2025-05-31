@@ -251,7 +251,7 @@ function getCurrentDocument() {
 }
 
 function getDataForCurrentEntity() {
-  return duplicate(
+  return foundry.utils.duplicate(
     getCurrentDocument().getFlag("fvtt-bcdice-addon", "macro-data") ?? {
       tabs: [],
       importSettings: {},

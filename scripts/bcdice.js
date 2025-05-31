@@ -102,14 +102,28 @@ Hooks.on("chatMessage", (chat, parameters, messageData) => {
   }
 });
 
+// Add scene control button
 Hooks.on("renderSceneControls", async function () {
-  if (!$("#bc-dice-control").length) {
-    $("#controls > .main-controls").append(
-      '<li class="scene-control" id="bc-dice-control" title="BC Dice [Shift] + [Ctrl] + [B]"><i class="fas fa-dice"></i></li>'
-    );
-    $("#bc-dice-control").click(() => {
-      showRoller(roller);
-    });
+  const bcdice_btn = $(`
+    <li>
+      <button type="button" class="control ui-control layer icon fa-solid fa-dice" 
+        role="tab" data-action="control" data-control="bcdice" data-tooltip 
+        aria-pressed="false" aria-label="BC Dice [Shift] + [Ctrl] + [Alt] + [B]" 
+        aria-controls="scene-controls-tools" id="scene-controls-layers">
+      </button>
+    </li>
+  `);
+
+  bcdice_btn.find("button").on("click", function () {
+    $(this).attr("aria-pressed", "true");
+    showRoller(roller);
+  });
+
+  const scene_controls_leyers = document.getElementById("scene-controls-layers");
+  if (scene_controls_leyers) {
+    if (!document.getElementById("bc-dice-control")) {
+      $(scene_controls_leyers).append(bcdice_btn);
+    }
   }
 });
 
@@ -181,7 +195,7 @@ async function registerKeybinds() {
     editable: [
       {
         key: "KeyB",
-        modifiers: ["Control", "Shift"],
+        modifiers: ["Control", "Shift", "Alt"],
       },
     ],
     onDown: () => {

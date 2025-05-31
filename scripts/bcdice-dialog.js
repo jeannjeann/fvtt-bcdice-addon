@@ -380,10 +380,10 @@ export default class BCDialog extends FormApplication {
     }
     this.dialog?.close();
 
-    const dialogContent = await renderTemplate(
+    const dialogContent = await foundry.applications.handlebars.renderTemplate(
       "modules/fvtt-bcdice-addon/templates/import.html",
       {
-        settings: mergeObject(
+        settings: foundry.utils.mergeObject(
           defaultImportSettings,
           getDataForCurrentEntity().settings
         ),
@@ -462,7 +462,7 @@ export default class BCDialog extends FormApplication {
     }
     this.dialog?.close();
 
-    const dialogContent = await renderTemplate(
+    const dialogContent = await foundry.applications.handlebars.renderTemplate(
       "modules/fvtt-bcdice-addon/templates/replacements.html",
       { replacements: getDataForCurrentEntity().replacements }
     );
@@ -532,7 +532,7 @@ export default class BCDialog extends FormApplication {
       target[key] = v;
     });
     const tabs = formData.tabs || getDataForCurrentEntity().tabs;
-    const data = mergeObject(getDataForCurrentEntity(), expandObject(formData));
+    const data = foundry.utils.mergeObject(getDataForCurrentEntity(), foundry.utils.expandObject(formData));
     data.tabs = tabs;
     await getCurrentDocument().setFlag("fvtt-bcdice-addon", "macro-data", data);
     this._render();

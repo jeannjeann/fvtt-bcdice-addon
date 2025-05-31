@@ -2,6 +2,7 @@
 
 ![Foundry Version Compatibility](https://img.shields.io/badge/Foundry-v11-informational)
 ![Foundry Version Compatibility](https://img.shields.io/badge/Foundry-v12-informational)
+![Foundry Version Compatibility](https://img.shields.io/badge/Foundry-v13-informational)
 
 [![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/X8X415YUSP)
 [![OFUSE](https://img.shields.io/badge/OFUSE-9cf.svg?style=for-the-badge)](https://ofuse.me/o?uid=81619)
@@ -69,6 +70,11 @@ HP : currenthp
 - [Token Action HUD BCDice](https://foundryvtt.com/packages/token-action-hud-bcdice)に対応（[Token Action HUD Core](https://foundryvtt.com/packages/token-action-hud-core)が必要）
 
 # Changelog
+
+### 4.4.0 - v13 compatibility
+- Suppoerted v13 (also works on v13, but with alerts)
+- Changed the shortcut keys to `[Shift] + [Ctrl] + [Alt] + [B]` (because the original conflicted with Chrome’s shortcuts.)
+- Refactoring deprecated code
 
 ### 4.3.1
 - bug fix

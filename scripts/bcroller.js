@@ -31,7 +31,7 @@ async function getSysHelp(system) {
 }
 
 async function setupRoller() {
-  await loadTemplates(
+    await foundry.applications.handlebars.loadTemplates(
     ["dialog", "import", "macro", "replacements"].map(
       (s) => `modules/fvtt-bcdice-addon/templates/${s}.html`
     )

@@ -18,7 +18,7 @@ export async function getSystems() {
       return [];
     }
   }
-  return duplicate(_cachedSystems);
+  return foundry.utils.duplicate(_cachedSystems);
 }
 
 export async function getHelpText(system) {

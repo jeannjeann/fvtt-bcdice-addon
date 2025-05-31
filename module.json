@@ -8,11 +8,11 @@
     }
   ],
   "url": "https://github.com/jeannjeann/fvtt-bcdice-addon",
-  "version": "4.3.1",
+  "version": "4.4.0",
   "compatibility": {
     "minimum": "11",
-    "verified": "11.315",
-    "maximum": "12"
+    "verified": "13.332",
+    "maximum": "13"
   },
   "esmodules": ["/scripts/bcdice.js"],
   "styles": ["/styles/bcdice.css"],

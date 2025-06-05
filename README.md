@@ -70,6 +70,9 @@ HP : currenthp
 
 # Changelog
 
+### 4.4.0 - v13 compatibility
+- Suppoerted v13
+
 ### 4.3.1
 - bug fix
 

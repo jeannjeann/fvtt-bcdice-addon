@@ -104,7 +104,7 @@ Hooks.on("chatMessage", (chat, parameters, messageData) => {
 
 // NewerVersion
 Hooks.on("renderSceneControls", async function () {
-  const isV13Plus = foundry.utils.isNewerVersion(game.version, "13.332");
+  const isV13Plus = foundry.utils.isNewerVersion(game.version, "13");
   // Add scene control button
   if (isV13Plus) {
     const bcdice_btn = $(`
@@ -122,7 +122,9 @@ Hooks.on("renderSceneControls", async function () {
       showRoller(roller);
     });
 
-    const scene_controls_leyers = document.getElementById("scene-controls-layers");
+    const scene_controls_leyers = document.getElementById(
+      "scene-controls-layers"
+    );
     if (scene_controls_leyers) {
       if (!document.getElementById("bc-dice-control")) {
         $(scene_controls_leyers).append(bcdice_btn);
@@ -373,7 +375,6 @@ class syncSettings extends FormApplication {
       closeOnSubmit: true,
     });
   }
-
   async getData() {
     this.sync =
       (await game.settings.get("fvtt-bcdice-addon", "syncValue")) || "";
@@ -381,7 +382,6 @@ class syncSettings extends FormApplication {
       sync: this.sync,
     };
   }
-
   activateListeners(html) {
     super.activateListeners(html);
     html.find('button[data-button="save"]').click(async (ev) => {

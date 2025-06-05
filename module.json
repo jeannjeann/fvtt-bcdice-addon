@@ -11,8 +11,7 @@
   "version": "4.4.0",
   "compatibility": {
     "minimum": "11",
-    "verified": "13.332",
-    "maximum": "13"
+    "verified": "12.343"
   },
   "esmodules": ["/scripts/bcdice.js"],
   "styles": ["/styles/bcdice.css"],
@@ -28,8 +27,8 @@
       "path": "languages/ja.json"
     }
   ],
-  "manifest": "https://github.com/jeannjeann/fvtt-bcdice-addon/releases/download/4.3.1/module.json",
-  "download": "https://github.com/jeannjeann/fvtt-bcdice-addon/releases/download/4.3.1/module.zip",
+  "manifest": "https://github.com/jeannjeann/fvtt-bcdice-addon/releases/download/4.4.0/module.json",
+  "download": "https://github.com/jeannjeann/fvtt-bcdice-addon/releases/download/4.4.0/module.zip",
   "license": "LICENSE.txt",
   "readme": "README.md"
 }

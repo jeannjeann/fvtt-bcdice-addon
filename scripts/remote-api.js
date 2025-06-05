@@ -18,7 +18,15 @@ export async function getSystems() {
       return [];
     }
   }
-  return duplicate(_cachedSystems);
+  const isV12Plus = foundry.utils.isNewerVersion(game.version, "12");
+  // v12 or later
+  if (isV12Plus) {
+    return foundry.utils.duplicate(_cachedSystems);
+  }
+  // under v11
+  else {
+    return duplicate(_cachedSystems);
+  }
 }
 
 export async function getHelpText(system) {

@@ -31,11 +31,23 @@ async function getSysHelp(system) {
 }
 
 async function setupRoller() {
-  await loadTemplates(
-    ["dialog", "import", "macro", "replacements"].map(
-      (s) => `modules/fvtt-bcdice-addon/templates/${s}.html`
-    )
-  );
+  const isV13Plus = foundry.utils.isNewerVersion(game.version, "13");
+  // v13 or later
+  if (isV13Plus) {
+    await foundry.applications.handlebars.loadTemplates(
+      ["dialog", "import", "macro", "replacements"].map(
+        (s) => `modules/fvtt-bcdice-addon/templates/${s}.html`
+      )
+    );
+  }
+  // under v12
+  else {
+    await loadTemplates(
+      ["dialog", "import", "macro", "replacements"].map(
+        (s) => `modules/fvtt-bcdice-addon/templates/${s}.html`
+      )
+    );
+  }
 
   const roller = new BCDiceDialog({ title: "BCDice Roller" });
   Hooks.on("canvasReady", () => roller.render());

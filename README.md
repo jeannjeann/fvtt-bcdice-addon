@@ -27,6 +27,10 @@ https://github.com/jeannjeann/fvtt-bcdice-addon/releases/latest/download/module.
 
 Please specify the letters "ManifestURL" in Mod Extensions, Module Installation, Specify URL and install.
 
+### 開発サポート
+
+- [komaru-5maru](https://github.com/komaru-5maru)
+
 ## Custom System Builderとの連携
 
 ### 使用方法
@@ -70,8 +74,9 @@ HP : currenthp
 
 # Changelog
 
-### 4.4.0 - v13 compatibility
-- Suppoerted v13
+### 4.4.0 - v12 compatibility and v13 partialy compatibility
+- Suppoerted v12
+- Suppoerted v13 (but with alerts)  by [komaru-5maru](https://github.com/komaru-5maru)
 
 ### 4.3.1
 - bug fix

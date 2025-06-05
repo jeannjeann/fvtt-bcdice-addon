@@ -251,13 +251,27 @@ function getCurrentDocument() {
 }
 
 function getDataForCurrentEntity() {
-  return duplicate(
-    getCurrentDocument().getFlag("fvtt-bcdice-addon", "macro-data") ?? {
-      tabs: [],
-      importSettings: {},
-      replacements: "",
-    }
-  );
+  const isV12Plus = foundry.utils.isNewerVersion(game.version, "12");
+  // v12 or later
+  if (isV12Plus) {
+    return foundry.utils.duplicate(
+      getCurrentDocument().getFlag("fvtt-bcdice-addon", "macro-data") ?? {
+        tabs: [],
+        importSettings: {},
+        replacements: "",
+      }
+    );
+  }
+  // under v11
+  else {
+    return duplicate(
+      getCurrentDocument().getFlag("fvtt-bcdice-addon", "macro-data") ?? {
+        tabs: [],
+        importSettings: {},
+        replacements: "",
+      }
+    );
+  }
 }
 
 // change variable function

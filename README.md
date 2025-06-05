@@ -2,6 +2,7 @@
 
 ![Foundry Version Compatibility](https://img.shields.io/badge/Foundry-v11-informational)
 ![Foundry Version Compatibility](https://img.shields.io/badge/Foundry-v12-informational)
+![Foundry Version Compatibility](https://img.shields.io/badge/Foundry-v13-informational)
 
 [![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/X8X415YUSP)
 [![OFUSE](https://img.shields.io/badge/OFUSE-9cf.svg?style=for-the-badge)](https://ofuse.me/o?uid=81619)

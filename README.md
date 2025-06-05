@@ -74,7 +74,7 @@ HP : currenthp
 
 # Changelog
 
-### 4.4.0 - v12 compatibility and v13 partialy compatibility
+### 4.4.0 - v12 compatibility and v13 partially compatibility
 - Suppoerted v12
 - Suppoerted v13 (but with alerts)  by [komaru-5maru](https://github.com/komaru-5maru)
 

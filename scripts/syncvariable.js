@@ -72,9 +72,9 @@ export async function toBCD(actorid, data) {
         );
       }
     }
-    const data = mergeObject(
+    const data = foundry.utils.mergeObject(
       getDataForCurrentEntity(),
-      expandObject({ replacements })
+      foundry.utils.expandObject({ replacements })
     );
     await getCurrentDocument().setFlag("fvtt-bcdice-addon", "macro-data", data);
   }

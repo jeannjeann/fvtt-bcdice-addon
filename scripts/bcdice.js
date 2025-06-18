@@ -365,7 +365,7 @@ class syncSettings extends FormApplication {
     this.sync = "";
   }
   static get defaultOptions() {
-    return mergeObject(super.defaultOptions, {
+    return foundry.utils.mergeObject(super.defaultOptions, {
       title: game.i18n.localize("fvtt-bcdice.syncSettings"),
       id: "syncsettings",
       template: "modules/fvtt-bcdice-addon/templates/sync.html",

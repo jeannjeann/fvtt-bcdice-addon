@@ -96,6 +96,11 @@ async function roll(system, formula, orgFormula) {
         alias: `${entity.name}`,
       },
     };
+    if (game.version >= 12) {
+      messageOptions.style = CONST.CHAT_MESSAGE_STYLES.OTHER;
+    } else {
+      messageOptions.type = CONST.CHAT_MESSAGE_TYPES.OTHER;
+    }
 
     if (getResultOutput()) {
       ChatMessage.create(messageOptions);
@@ -218,7 +223,7 @@ async function roll(system, formula, orgFormula) {
       }, {});
 
       let DieClass;
-      if (foundry.utils.isNewerVersion(game.version, "12")) {
+      if (game.version >= 12) {
         DieClass = foundry.dice.terms.Die;
       } else {
         DieClass = Die;
@@ -268,12 +273,18 @@ async function roll(system, formula, orgFormula) {
         "fvtt-bcdice.invalidFormula"
       );
       if (getResultOutput()) {
-        ChatMessage.create({
+        const errorOptions = {
           content: `${formula}`,
           speaker: {
             alias: `${entity.name}`,
           },
-        });
+        };
+        if (game.version >= 12) {
+          errorOptions.style = CONST.CHAT_MESSAGE_STYLES.OTHER;
+        } else {
+          errorOptions.type = CONST.CHAT_MESSAGE_STYLES.OTHER;
+        }
+        ChatMessage.create(errorOptions);
       }
     }
     //console.error(err);

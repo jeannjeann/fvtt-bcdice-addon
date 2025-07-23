@@ -246,6 +246,9 @@ async function roll(system, formula, orgFormula) {
         evaluated: true,
       });
       messageOptions.rolls = [roll];
+      if (game.version < 12) {
+        messageOptions.type = CONST.CHAT_MESSAGE_TYPES.ROLL;
+      }
     }
 
     if (game.dice3d?.isEnabled() && hasDice) {

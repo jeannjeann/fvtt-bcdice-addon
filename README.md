@@ -75,6 +75,9 @@ HP : currenthp
 
 # Changelog
 
+### 4.4.2
+- bug fix
+
 ### 4.4.1
 - bug fix
 

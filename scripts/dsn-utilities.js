@@ -191,13 +191,64 @@ async function roll(system, formula, orgFormula) {
       messageOptions.whisper = [game.user.id];
     }
 
-    if (game.dice3d?.isEnabled()) {
-      const rolls = parseBCtoDSN(data.rands);
-      if (!rolls.throws[0].dice.length)
-        messageOptions.sound = "sounds/dice.wav";
+    const dsnRolls = parseBCtoDSN(data.rands);
+    let hasDice = dsnRolls.throws[0].dice.length > 0;
+
+    if (hasDice) {
+      const finalDice = [];
+      const tempDice = [...dsnRolls.throws[0].dice];
+      while (tempDice.length > 0) {
+        const die = tempDice.shift();
+        if (die.type === "d100" && tempDice[0]?.type === "d10") {
+          const d10 = tempDice.shift();
+          const combinedResult = die.result * 10 + d10.result;
+          finalDice.push({
+            type: "d100",
+            result: combinedResult === 0 ? 100 : combinedResult,
+          });
+        } else {
+          finalDice.push(die);
+        }
+      }
+
+      const groupedDice = finalDice.reduce((acc, die) => {
+        if (!acc[die.type]) acc[die.type] = [];
+        acc[die.type].push({ result: die.result, active: true });
+        return acc;
+      }, {});
+
+      let DieClass;
+      if (foundry.utils.isNewerVersion(game.version, "12")) {
+        DieClass = foundry.dice.terms.Die;
+      } else {
+        DieClass = Die;
+      }
+
+      const terms = Object.entries(groupedDice).map(([type, results]) => {
+        const term = new DieClass({
+          number: results.length,
+          faces: parseInt(type.substring(1)),
+          results: results,
+        });
+        term._evaluated = true;
+        return term;
+      });
+
+      const roll = Roll.fromData({
+        formula: Roll.getFormula(terms),
+        terms: terms,
+        total: finalDice.reduce((acc, d) => acc + d.result, 0),
+        evaluated: true,
+      });
+      messageOptions.rolls = [roll];
+    }
+
+    if (game.dice3d?.isEnabled() && hasDice) {
+      /*
       await game.dice3d
-        .show(rolls, game.user, !data.secret)
+        .show(dsnRolls, game.user, !data.secret)
         .then((displayed) => {});
+      */
     } else {
       messageOptions.sound = "sounds/dice.wav";
     }

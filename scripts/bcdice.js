@@ -107,12 +107,13 @@ Hooks.on("renderSceneControls", async function () {
   const isV13Plus = foundry.utils.isNewerVersion(game.version, "13");
   // Add scene control button
   if (isV13Plus) {
+    if (document.getElementById("bc-dice-control")) return;
     const bcdice_btn = $(`
       <li>
         <button type="button" class="control ui-control layer icon fa-solid fa-dice" 
           role="tab" data-action="control" data-control="bcdice" data-tooltip 
           aria-pressed="false" aria-label="BC Dice [Shift] + [Ctrl] + [B]" 
-          aria-controls="scene-controls-tools" id="scene-controls-layers">
+          aria-controls="scene-controls-tools" id="bc-dice-control">
         </button>
       </li>
     `);

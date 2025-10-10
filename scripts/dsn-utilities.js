@@ -239,10 +239,28 @@ async function roll(system, formula, orgFormula) {
         return term;
       });
 
+      const diceOnlyTotal = finalDice.reduce((acc, d) => acc + d.result, 0);
+      let finalTotal = diceOnlyTotal;
+
+      const allParts = data.text.split("＞");
+
+      if (allParts.length > 1) {
+        const resultParts = allParts.slice(1).reverse();
+
+        for (const part of resultParts) {
+          const trimmedPart = part.trim();
+          const match = trimmedPart.match(/^-?\d+/);
+          if (match) {
+            finalTotal = parseInt(match[0], 10);
+            break;
+          }
+        }
+      }
+
       const roll = Roll.fromData({
         formula: Roll.getFormula(terms),
         terms: terms,
-        total: finalDice.reduce((acc, d) => acc + d.result, 0),
+        total: finalTotal,
         evaluated: true,
       });
       messageOptions.rolls = [roll];

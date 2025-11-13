@@ -1,5 +1,5 @@
 import { APIError } from "./errors.js";
-import { getRoll } from "./remote-api.js";
+import { getRoll, rollOriginalTable } from "./remote-api.js";
 import { toCSB } from "./syncvariable.js";
 import { ActorDialog } from "./bcdice.js";
 
@@ -64,11 +64,12 @@ function appendDSNRoll(acc, value, sides) {
 async function roll(system, formula, orgFormula) {
   const aliasText = `{${system}`;
   const entity = getCurrentDocument();
+  const displayFormula = orgFormula || formula;
   const userMessageOptions = {
     speaker: {
       alias: `${entity.name}`,
     },
-    content: `${formula}`,
+    content: `${displayFormula}`,
   };
 
   // variable change command
@@ -129,7 +130,12 @@ async function roll(system, formula, orgFormula) {
 
   // ChatMessage.create(userMessageOptions);
   try {
-    const data = await getRoll(system, toHalfWidth(formula));
+    let data;
+    if (system === "OriginalTable") {
+      data = await rollOriginalTable(formula);
+    } else {
+      data = await getRoll(system, toHalfWidth(formula));
+    }
 
     let successColor = getSuccessColor();
     let failureColor = getFailureColor();
@@ -181,7 +187,7 @@ async function roll(system, formula, orgFormula) {
     //   .replace(/,/g, ",\u200B");
 
     const message = `<div><i class="fas fa-dice"></i> 
-                        ${formula} ${results}
+                        ${displayFormula} ${results}
                       </div>`;
 
     const messageOptions = {
@@ -295,7 +301,7 @@ async function roll(system, formula, orgFormula) {
       );
       if (getResultOutput()) {
         const errorOptions = {
-          content: `${formula}`,
+          content: `${displayFormula}`,
           speaker: {
             alias: `${entity.name}`,
           },

@@ -40,14 +40,46 @@ export async function getRoll(system, command) {
   return doRequest(url);
 }
 
+export async function rollOriginalTable(tableText) {
+  const url = new URL(`${getDiceServer()}/original_table`);
+  url.searchParams.append("table", tableText);
+  const request = await fetch(url.toString(), {
+    method: "POST",
+  });
+  if (!request.ok) {
+    throw new APIError(
+      "BCDice API Error (Original Table)",
+      request,
+      `API returned status ${request.status}`
+    );
+  }
+  const data = await request.json();
+  if (!data.ok) {
+    throw new APIError(
+      "BCDice API Error (Original Table)",
+      request,
+      data.reason || `API returned with ok:false`
+    );
+  }
+  return data;
+}
+
 export async function doRequest(url) {
   const request = await fetch(url);
+  if (!request.ok) {
+    throw new APIError(
+      "There was an error from the API.",
+      request,
+      `API returned status ${request.status}`
+    );
+  }
   const data = await request.json();
-  if (!data.ok)
+  if (!data.ok) {
     throw new APIError(
       "There was an error from the API.",
       request,
       data.reason
     );
+  }
   return data;
 }

@@ -58,5 +58,22 @@
   "fvtt-bcdice.syncSettingsName": "Sync Settings",
   "fvtt-bcdice.syncSettingshint": "Set variables to be synchronized during Custom System Builder Cooperation.",
   "fvtt-bcdice.syncSettingsLabel": "Sync Settings",
-  "fvtt-bcdice.importReplacements": "Separate replacements and import them at the same time"
+  "fvtt-bcdice.importReplacements": "Separate replacements and import them at the same time",
+  "fvtt-bcdice.originalTable.menuName": "Original Tables",
+  "fvtt-bcdice.originalTable.menuHint": "Create and manage BCDice-compatible original tables. You can execute original tables by entering the command in the [BCDice Roller] or by entering the command with \"/bcd\" in a chat message.",
+  "fvtt-bcdice.originalTable.backup": "Backup",
+  "fvtt-bcdice.originalTable.restore": "Restore",
+  "fvtt-bcdice.originalTable.command": "Command",
+  "fvtt-bcdice.originalTable.notes": "For details on the format, check the <a href=\"https://docs.bcdice.org/original_table.html\" target=\"_blank\">BCDice Command Guide</a>.",
+  "fvtt-bcdice.originalTable.defaultTableName": "Original Table",
+  "fvtt-bcdice.originalTable.deleteTitle": "Delete",
+  "fvtt-bcdice.originalTable.confirmDeleteContent": "<p>Are you sure you want to delete this original table?</p>",
+  "fvtt-bcdice.originalTable.backupSuccess": "Backed up the original tables.",
+  "fvtt-bcdice.originalTable.confirmRestoreContent": "<p>This will overwrite all. Are you sure?</p>",
+  "fvtt-bcdice.originalTable.restoreSuccess": "Restored the original tables.",
+  "fvtt-bcdice.originalTable.restoreError.notArray": "The JSON data is not in array format.",
+  "fvtt-bcdice.originalTable.restoreError.readFile": "Failed to read file: {message}",
+  "fvtt-bcdice.originalTable.validation.alphanumeric": "Command can only contain alphanumeric characters.",
+  "fvtt-bcdice.originalTable.validation.duplicate": "The command \"{command}\" is already in use.",
+  "fvtt-bcdice.originalTable.validation.commandRequired": "Command cannot be empty."
 }

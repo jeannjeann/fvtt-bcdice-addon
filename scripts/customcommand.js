@@ -1,4 +1,4 @@
-import { getDataForCurrentEntity, roll } from "./dsn-utilities.js";
+import { roll, getDataForCurrentEntity } from "./dsn-utilities.js";
 
 const replacementRegex = /\{\s*([^\}]+)\s*\}/g;
 
@@ -6,9 +6,23 @@ const replacementRegex = /\{\s*([^\}]+)\s*\}/g;
  * Execute BCDice comannds.
  */
 export async function customCommand(command, messageData, parameters) {
+  // check original table
+  const originalTables =
+    game.settings.get("fvtt-bcdice-addon", "originalTables") ?? [];
+  const commandPart = parameters.trim().split(" ")[0];
+  if (commandPart) {
+    const matchedTable = originalTables.find(
+      (t) => t.command.toLowerCase() === commandPart.toLowerCase()
+    );
+    if (matchedTable) {
+      await roll("OriginalTable", matchedTable.table, parameters);
+      return;
+    }
+  }
+
+  // check roll formula
   let rollFormula = parameters || "";
   let orgFormula = parameters || "";
-
   if (rollFormula !== "") {
     const system =
       game.user.getFlag("fvtt-bcdice-addon", "sys-id") ??
@@ -21,10 +35,8 @@ export async function customCommand(command, messageData, parameters) {
         return replacements[token] ?? "";
       });
     }
-
-    const results = await roll(system, rollFormula, orgFormula);
-    const result = await getResult(system, results);
-    return result;
+    await roll(system, rollFormula, orgFormula);
+    return;
   }
 }
 

@@ -1,0 +1,43 @@
+<form>
+  <div class="bcd-original-table-container">
+    <div class="sidebar">
+      <div class="sidebar-content">
+        <ol class="table-list">
+          {{#each tables}}
+          <li class="table-item {{#if (eq this.id @root.activeId)}}active{{/if}}" data-id="{{this.id}}">
+            <div class="table-info">
+              <strong class="table-name">{{this.name}}</strong>
+              <span class="table-command">{{this.command}}</span>
+            </div>
+            <a class="delete-table" title="{{localize 'fvtt-bcdice.originalTable.deleteTitle'}}"><i class="fas fa-trash"></i></a>
+          </li>
+          {{/each}}
+        </ol>
+        <div class="add-new-item">
+          <a class="add-table"><i class="fas fa-plus"></i></a>
+        </div>
+      </div>
+      <div class="sidebar-footer">
+        <button type="button" name="backup">
+          <i class="fas fa-download"></i> {{localize "fvtt-bcdice.originalTable.backup"}}
+        </button>
+        <button type="button" name="restore">
+          <i class="fas fa-upload"></i> {{localize "fvtt-bcdice.originalTable.restore"}}
+        </button>
+      </div>
+    </div>
+    <div class="content">
+      <div class="form-group form-group-horizontal">
+        <label for="command">{{localize "fvtt-bcdice.originalTable.command"}}</label>
+        <input type="text" name="command" value="{{activeTable.command}}">
+      </div>
+      <div class="form-group form-group-stretch">
+        <textarea name="table">{{activeTable.table}}</textarea>
+      </div>
+      <div class="form-group">
+        <p class="notes">
+          {{{localize "fvtt-bcdice.originalTable.notes"}}}
+        </p>
+      </div>
+    </div>
+  </div>

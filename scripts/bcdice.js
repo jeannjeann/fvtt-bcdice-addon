@@ -1,8 +1,9 @@
 import { showRoller, setupRoller } from "./bcroller.js";
-import { getSystems } from "./remote-api.js";
+import { getSystems, rollOriginalTable } from "./remote-api.js";
 import { getDataForCurrentEntity } from "./dsn-utilities.js";
 import { customCommand } from "./customcommand.js";
 import { toBCD } from "./syncvariable.js";
+import OriginalTableApplication from "./original-table.js";
 
 let roller;
 const command = "/bcd";
@@ -32,6 +33,7 @@ Hooks.once("init", async () => {
 
   game.modules.get("fvtt-bcdice-addon").api = {
     getDataForCurrentEntity,
+    rollOriginalTable,
     customCommand,
   };
 
@@ -252,31 +254,50 @@ const onClickInlineRollButton = (event) => {
 };
 
 async function registerSettings() {
-  game.settings.registerMenu("fvtt-bcdice-addon", "syncsettings", {
-    name: game.i18n.localize("fvtt-bcdice.syncSettingsName"),
-    hint: game.i18n.localize("fvtt-bcdice.syncSettingshint"),
-    label: game.i18n.localize("fvtt-bcdice.syncSettingsLabel"),
-    icon: "fas fa-cog",
+  game.settings.registerMenu("fvtt-bcdice-addon", "originalTableMenu", {
+    name: game.i18n.localize("fvtt-bcdice.originalTable.menuName"),
+    hint: game.i18n.localize("fvtt-bcdice.originalTable.menuHint"),
+    label: game.i18n.localize("fvtt-bcdice.originalTable.menuName"),
+    icon: "fas fa-table",
     scope: "world",
-    type: syncSettings,
+    type: OriginalTableApplication,
     restricted: true,
   });
 
-  game.settings.register("fvtt-bcdice-addon", "syncValue", {
+  game.settings.register("fvtt-bcdice-addon", "originalTables", {
     scope: "world",
     config: false,
-    type: String,
-    default: "",
+    type: Array,
+    default: [],
   });
 
-  game.settings.register("fvtt-bcdice-addon", "csb-cooperation", {
-    name: game.i18n.localize("fvtt-bcdice.csbCooperationName"),
-    hint: game.i18n.localize("fvtt-bcdice.csbCooperationHint"),
-    scope: "world",
-    config: true,
-    type: Boolean,
-    default: false,
-  });
+  if (game.system.id === "custom-system-builder") {
+    game.settings.registerMenu("fvtt-bcdice-addon", "syncsettings", {
+      name: game.i18n.localize("fvtt-bcdice.syncSettingsName"),
+      hint: game.i18n.localize("fvtt-bcdice.syncSettingshint"),
+      label: game.i18n.localize("fvtt-bcdice.syncSettingsLabel"),
+      icon: "fas fa-cog",
+      scope: "world",
+      type: syncSettings,
+      restricted: true,
+    });
+
+    game.settings.register("fvtt-bcdice-addon", "syncValue", {
+      scope: "world",
+      config: false,
+      type: String,
+      default: "",
+    });
+
+    game.settings.register("fvtt-bcdice-addon", "csb-cooperation", {
+      name: game.i18n.localize("fvtt-bcdice.csbCooperationName"),
+      hint: game.i18n.localize("fvtt-bcdice.csbCooperationHint"),
+      scope: "world",
+      config: true,
+      type: Boolean,
+      default: false,
+    });
+  }
 
   game.settings.register("fvtt-bcdice-addon", "roller-persistance", {
     name: game.i18n.localize("fvtt-bcdice.persistanceSettingName"),

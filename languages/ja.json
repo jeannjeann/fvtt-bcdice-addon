@@ -58,5 +58,22 @@
   "fvtt-bcdice.syncSettingsName": "同期対象変数設定",
   "fvtt-bcdice.syncSettingshint": "CustomSystemBuilder連携時の同期対象変数を設定します。",
   "fvtt-bcdice.syncSettingsLabel": "同期対象変数設定",
-  "fvtt-bcdice.importReplacements": "変数を分離して同時にインポートする"
+  "fvtt-bcdice.importReplacements": "変数を分離して同時にインポートする",
+  "fvtt-bcdice.originalTable.menuName": "オリジナル表設定",
+  "fvtt-bcdice.originalTable.menuHint": "オリジナル表を作成・管理します。オリジナル表の実行は、[BCDice Roller]でオリジナル表のコマンドを入力するか、チャットメッセージで「/bcd」でオリジナル表のコマンドを入力して行います。",
+  "fvtt-bcdice.originalTable.backup": "バックアップ",
+  "fvtt-bcdice.originalTable.restore": "リストア",
+  "fvtt-bcdice.originalTable.command": "コマンド",
+  "fvtt-bcdice.originalTable.notes": "表の書式は<a href=\"https://docs.bcdice.org/original_table.html\" target=\"_blank\">BCDiceコマンドガイド</a>を参照してください。",
+  "fvtt-bcdice.originalTable.defaultTableName": "オリジナル表",
+  "fvtt-bcdice.originalTable.deleteTitle": "削除",
+  "fvtt-bcdice.originalTable.confirmDeleteContent": "<p>このオリジナル表を削除しますか？</p>",
+  "fvtt-bcdice.originalTable.backupSuccess": "オリジナル表をバックアップしました。",
+  "fvtt-bcdice.originalTable.confirmRestoreContent": "<p>すべて上書きされます。リストアしますか？</p>",
+  "fvtt-bcdice.originalTable.restoreSuccess": "オリジナル表をリストアしました。",
+  "fvtt-bcdice.originalTable.restoreError.notArray": "JSONデータが配列形式ではありません。",
+  "fvtt-bcdice.originalTable.restoreError.readFile": "ファイルの読み込みに失敗しました: {message}",
+  "fvtt-bcdice.originalTable.validation.alphanumeric": "コマンドには半角英数字のみ使用できます。",
+  "fvtt-bcdice.originalTable.validation.duplicate": "コマンド \"{command}\" は既に使用されています。",
+  "fvtt-bcdice.originalTable.validation.commandRequired": "コマンドは空にできません。"
 }

@@ -75,6 +75,10 @@ HP : currenthp
 
 # Changelog
 
+### 4.5.0
+- support for BCDice Original Tables
+- bug fix
+
 ### 4.4.3
 - fix total value calculation
 - bug fix
